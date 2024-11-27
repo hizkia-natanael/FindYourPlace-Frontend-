@@ -1,38 +1,44 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Button } from "../../atoms";
+import { Button, Logo } from "../../atoms";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <header className="bg-white shadow-md font-poppins">
+    <header className="fixed top-0 left-0 w-full bg-white bg-opacity-70 shadow-md font-poppins z-50">
       <div className="container mx-auto flex items-center justify-between p-4">
-        <div className="relative text-2xl font-bold text-black">
-          <div className="relative z-10">
-            FindYour<span className="text-[#c66e4e]">Place</span>
-          </div>
-          <div className="absolute bg-[#c66e4e] w-6 h-6 lg:w-7 lg:h-7 rounded-full top-[-5px] left-[-10px] lg:top-[-10px] lg:left-[-20px] z-0"></div>
+        <div>
+          <Logo className="w-44" />
         </div>
 
         <nav className="hidden md:flex gap-6">
-          <Link to={"#"} className="text-gray-700 text-sm hover:text-[#c66e4e]">
+          <Link to="/" className="text-gray-700 text-sm hover:text-[#c66e4e]">
             Beranda
           </Link>
-          <Link to={"#"} className="text-gray-700 text-sm hover:text-[#c66e4e]">
+          <Link
+            to="/daftar-tempat"
+            className="text-gray-700 text-sm hover:text-[#c66e4e]"
+          >
             Daftar Tempat
           </Link>
-          <Link to={"#"} className="text-gray-700 text-sm hover:text-[#c66e4e]">
+          <Link
+            to="/tentang-kami"
+            className="text-gray-700 text-sm hover:text-[#c66e4e]"
+          >
             Tentang kami
           </Link>
-          <Link to={"#"} className="text-gray-700 text-sm hover:text-[#c66e4e]">
+          <Link
+            to="/kontak"
+            className="text-gray-700 text-sm hover:text-[#c66e4e]"
+          >
             Kontak
           </Link>
         </nav>
         <Button className="hidden md:flex bg-[#c66e4e] text-white">
           Login
         </Button>
-        {/* hamberger icon */}
+        {/* hamburger icon */}
         <div className="md:hidden flex items-center">
           <Button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -58,33 +64,35 @@ const Header = () => {
 
       {/* Mobile */}
       {isMenuOpen && (
-        <div className="md:hidden bg-white shadow-md py-4 px-6">
+        <div className="md:hidden bg-white bg-opacity-70 shadow-md py-4 px-6">
           <nav className="flex flex-col gap-4">
             <Link
-              to={"#"}
-              className="text-gray-700 text-sm hover:text-[#c66e4e]"
+              to="/"
+              className="text-gray-700 font-medium text-sm hover:text-[#c66e4e]"
             >
               Beranda
             </Link>
             <Link
-              to={"#"}
-              className="text-gray-700 text-sm hover:text-[#c66e4e]"
+              to="/daftar-tempat"
+              className="text-gray-700 text-sm font-medium hover:text-[#c66e4e]"
             >
               Daftar Tempat
             </Link>
             <Link
-              to={"#"}
-              className="text-gray-700 text-sm hover:text-[#c66e4e]"
+              to="/tentang-kami"
+              className="text-gray-700 text-sm font-medium hover:text-[#c66e4e]"
             >
               Tentang kami
             </Link>
             <Link
-              to={"#"}
-              className="text-gray-700 text-sm hover:text-[#c66e4e]"
+              to="/kontak"
+              className="text-gray-700 text-sm font-medium hover:text-[#c66e4e]"
             >
               Kontak
             </Link>
-            <Button className="bg-[#c66e4e] text-white">Login</Button>
+            <Button className="bg-[#c66e4e] font-medium text-white">
+              Login
+            </Button>
           </nav>
         </div>
       )}
