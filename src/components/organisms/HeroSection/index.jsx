@@ -13,7 +13,10 @@ const HeroSection = () => {
       }}
     >
       <div className="absolute inset-0 bg-white bg-opacity-70"></div>
-      <div className="relative z-10 p-4 mt-40">
+      <div className="relative z-10 p-4 lg:mt-28 sm:mt-4 w-full">
+        <div className="relative bottom-3 flex justify-center items-center z-10 mb-4">
+          <SearchBar />
+        </div>
         <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
           Cari <span className="text-[#c66e4e]">Tempat Nongkrong</span> Yang
           Pas?
@@ -28,9 +31,6 @@ const HeroSection = () => {
         <Button className="mb-4 bg-[#c66e4e] text-white">
           Lihat Tempat Nongkrong
         </Button>
-      </div>
-      <div className="relative bottom-3 w-full flex justify-center items-center z-10 mt-7">
-        <SearchBar />
       </div>
     </div>
   );
