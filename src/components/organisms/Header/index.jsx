@@ -6,7 +6,7 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <header className="fixed top-0 left-0 w-full bg-white bg-opacity-70 shadow-md font-poppins z-50">
+    <header className="fixed top-0 left-0 w-full bg-white bg-opacity-100 shadow-md font-poppins z-50">
       <div className="container mx-auto flex items-center justify-between p-4">
         <div>
           <Logo className="w-44" />
@@ -64,7 +64,7 @@ const Header = () => {
 
       {/* Mobile */}
       {isMenuOpen && (
-        <div className="md:hidden bg-white bg-opacity-70 shadow-md py-4 px-6">
+        <div className="md:hidden bg-white bg-opacity-100 shadow-md py-4 px-6">
           <nav className="flex flex-col gap-4">
             <Link
               to="/"
