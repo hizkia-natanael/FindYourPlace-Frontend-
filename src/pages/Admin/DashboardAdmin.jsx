@@ -10,7 +10,7 @@ import { IoIosChatbubbles } from 'react-icons/io';
 const DashboardAdmin = () => {
   const navigate = useNavigate();
   return (
-    <Box bg="#FFFFFF" minHeight="100vh"> {/* White background for entire page */}
+    <Box bg="#E8E8E8" minHeight="100vh"> {/* White background for entire page */}
       {/* Header */}
       <Box
         bg={"#FFFFFF"}
@@ -24,12 +24,12 @@ const DashboardAdmin = () => {
       </Box>
 
       {/* Main Content */}
-      <HStack display={"flex"} alignItems={"flex-start"} w={"full"}>
+      <HStack h={"full"} display={"flex"} alignItems={"flex-start"} w={"full"}>
         {/* Sidebar */}
         <VStack
           bg={"#FFFFFF"}
           w={"252px"}
-          h={"full"}
+          h={"90vh"}
           p={"10"}
           borderRadius={"0 0 10px 0"} // Membuat hanya sisi kanan melengkung
         >
@@ -70,11 +70,12 @@ const DashboardAdmin = () => {
         <VStack
           bg={"#FFFFFF"}
           flex={1}
-          h={"calc(100vh - 155px)"}
-          borderRadius={"20px"}
+          h={"90vh"}
+          borderRadius={"10px"}
           p={"16"}
           ml={"8"}
           spacing={4}
+          gap={"10"}
         >
           {/* Card 1 */}
           <Box
