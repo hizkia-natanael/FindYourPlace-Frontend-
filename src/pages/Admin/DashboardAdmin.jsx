@@ -24,14 +24,14 @@ const DashboardAdmin = () => {
       </Box>
 
       {/* Main Content */}
-      <HStack h={"full"} display={"flex"} alignItems={"flex-start"} w={"full"}>
+      <HStack h={"89vh"} display={"flex"} alignItems={"flex-start"} w={"full"} position={"relative"} top={"1vh"}>
         {/* Sidebar */}
         <VStack
           bg={"#FFFFFF"}
           w={"252px"}
-          h={"90vh"}
           p={"10"}
-          borderRadius={"0 0 10px 0"} // Membuat hanya sisi kanan melengkung
+          borderRadius={"0 0 10px 0"} 
+          h={"full"}
         >
           <Image 
             src="https://i.pinimg.com/564x/86/b0/5b/86b05b5f1bdca7da73f0d89651ccb186.jpg" 
@@ -70,7 +70,7 @@ const DashboardAdmin = () => {
         <VStack
           bg={"#FFFFFF"}
           flex={1}
-          h={"90vh"}
+          h={"full"}
           borderRadius={"10px"}
           p={"16"}
           ml={"8"}
