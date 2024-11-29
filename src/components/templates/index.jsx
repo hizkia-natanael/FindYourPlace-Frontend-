@@ -1,3 +1,5 @@
 import Layout from "./Layouts";
+import LoginTemplate from "./LoginTemplate";
+import RegisterTemplate from "./RegisterTemplate";
 
-export { Layout };
+export { Layout, LoginTemplate, RegisterTemplate };

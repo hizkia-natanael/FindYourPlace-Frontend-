@@ -36,11 +36,11 @@ const Header = () => {
           </Link>
         </nav>
         <Link to="/login">
-        <Button className="hidden md:flex bg-[#c66e4e] text-white">
-          Login
-        </Button>
+          <Button className="hidden md:flex bg-[#c66e4e] text-white">
+            Login
+          </Button>
         </Link>
-       
+
         {/* hamburger icon */}
         <div className="md:hidden flex items-center">
           <Button
@@ -80,9 +80,11 @@ const Header = () => {
             >
               Kontak
             </Link>
-            <Button className="bg-[#c66e4e] font-medium text-white">
-              Login
-            </Button>
+            <Link to={"/login"}>
+              <Button className="bg-[#c66e4e] font-medium text-white">
+                Login
+              </Button>
+            </Link>
           </nav>
         </div>
       )}

@@ -1,5 +1,9 @@
-const Label = (props) => {
-  const { htmlFor, children } = props;
-  return <label htmlFor={htmlFor}>{children}</label>;
+const Label = ({ htmlFor, children }) => {
+  return (
+    <label htmlFor={htmlFor} className="block text-sm font-medium text-black">
+      {children}
+    </label>
+  );
 };
+
 export default Label;
