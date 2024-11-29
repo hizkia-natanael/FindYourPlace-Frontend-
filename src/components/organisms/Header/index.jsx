@@ -35,9 +35,12 @@ const Header = () => {
             Kontak
           </Link>
         </nav>
+        <Link to="/login">
         <Button className="hidden md:flex bg-[#c66e4e] text-white">
           Login
         </Button>
+        </Link>
+       
         {/* hamburger icon */}
         <div className="md:hidden flex items-center">
           <Button
