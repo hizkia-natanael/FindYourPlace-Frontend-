@@ -4,7 +4,7 @@ import { Layout } from "../components/templates";
 import NotFound from "../pages/NotFound";
 import DashboardAdmin from "../pages/Admin/DashboardAdmin";
 import TentangKami from "../pages/TentangKami";
-
+import DaftarTempat from "../pages/Daftar Tempat/DaftarTempat";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -21,6 +21,10 @@ const router = createBrowserRouter([
       {
         path: "/tentang-kami",  
         element: <TentangKami />, 
+      },
+      {
+        path: "/daftar-tempat",
+        element: <DaftarTempat />, 
       },
     ],
   },
