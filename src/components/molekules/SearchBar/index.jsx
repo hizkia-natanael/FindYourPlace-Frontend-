@@ -1,10 +1,15 @@
 import { Input, Button } from "../../atoms";
 
-const SearchBar = () => {
+const SearchBar = ({ value, onChange }) => {
   return (
     <div className="flex">
-      <Input className="flex-grow w-full" placeholder="Cari Tempat Nongkrong" />
-      <Button className="ml-2 bg-[#c66e4e] text-white">Cari</Button>
+      <Input
+        className="flex-grow w-full shadow-xl shadow-zinc-600 border border-black"
+        placeholder="Cari Tempat Nongkrong"
+      />
+      <Button className="ml-2 bg-[#c66e4e] shadow-xl shadow-zinc-600 text-white">
+        Cari
+      </Button>
     </div>
   );
 };
