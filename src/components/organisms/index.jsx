@@ -1,6 +1,6 @@
 import HeroSection from "./HeroSection";
-import RatingSection from "./RentingSection";
 import Header from "./Header";
 import Footer from "./Footer";
+import FindYourPlace from "./FindYourPlace";
 
-export { HeroSection, RatingSection, Header, Footer };
+export { HeroSection, Header, Footer, FindYourPlace };

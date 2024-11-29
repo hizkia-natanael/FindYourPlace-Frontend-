@@ -1,4 +1,5 @@
-import Card from "./Card";
+import Card from "../atoms/Card";
 import SearchBar from "./SearchBar";
-
-export { Card, SearchBar };
+import RatingSection from "./RatingSection";
+import InfoSection from "./InfoSection";
+export { Card, SearchBar, RatingSection, InfoSection };

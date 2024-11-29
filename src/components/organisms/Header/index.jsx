@@ -6,11 +6,7 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-<<<<<<< HEAD
-    <header className="fixed top-0 left-0 w-full bg-white  shadow-md font-poppins z-50">
-=======
     <header className="fixed top-0 left-0 w-full bg-white bg-opacity-100 shadow-md font-poppins z-50">
->>>>>>> d7ca3dd9d69142c5cfd64f37a81672d2efc53e14
       <div className="container mx-auto flex items-center justify-between p-4">
         <div>
           <Logo className="w-44" />
