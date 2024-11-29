@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, VStack, HStack, Heading, Text, Container, Button, Flex } from '@chakra-ui/react';
 import { MapPin, Building2, MessageCircleQuestion, Hand, Info, Star } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { MapPinned } from 'lucide-react'; 
 
 const TentangKami = () => {
   const navigate = useNavigate();
@@ -117,6 +118,7 @@ const TentangKami = () => {
           mb={6} 
           fontSize={["3xl", "5xl"]} 
           fontWeight="bold"
+          pt={12}
         >
           TENTANG KAMI
         </Heading>
@@ -155,7 +157,7 @@ const TentangKami = () => {
         <SectionHeader
           title="Telusuri Sekarang"
           isButton
-          onClick={() => navigate('/telusuri')} 
+          onClick={() => navigate('/daftar-tempat')} 
         />
       </Container>
     </Box>
