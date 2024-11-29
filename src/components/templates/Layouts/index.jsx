@@ -1,4 +1,4 @@
-import { Header } from "../../organisms";
+import { Header, Footer } from "../../organisms";
 import { Outlet } from "react-router-dom";
 const Layout = () => {
   return (
@@ -7,6 +7,7 @@ const Layout = () => {
       <div>
         <Outlet />
       </div>
+      <Footer />
     </div>
   );
 };

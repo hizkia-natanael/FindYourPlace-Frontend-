@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "../../atoms";
 import { SearchBar } from "../../molekules";
+import { Typewriter } from "react-simple-typewriter";
 
 const HeroSection = () => {
+  const [message, setMessage] = useState(["Temukan Di Sini!"]);
   return (
     <div
       className="relative flex flex-col items-start justify-center font-poppins px-4 sm:px-10 text-black min-h-screen"
@@ -22,7 +24,7 @@ const HeroSection = () => {
           Pas?
         </h1>
         <p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-4">
-          Temukan Di Sini!
+          <Typewriter words={message} loop={false} cursor={"|"} />
         </p>
         <div className="mt-6 sm:mt-10 text-base sm:text-lg md:text-xl lg:text-xl font-medium mb-4">
           <p>Nongkrong jadi lebih seru</p>
