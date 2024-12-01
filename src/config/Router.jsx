@@ -33,6 +33,7 @@ const router = createBrowserRouter([
         path: "/kontak",
         element: <KontakKami />,
       },
+      
     ],
   },
   {
