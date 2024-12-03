@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Box, Heading, Text, Container, Grid, GridItem, Stack, Flex, Input, Textarea, Button } from '@chakra-ui/react';
 import { Mail, MapPinned, Phone, PhoneCall } from 'lucide-react';
+import { px } from 'framer-motion';
 
 const KontakKami = () => {
   const [formData, setFormData] = useState({
@@ -39,10 +40,10 @@ const KontakKami = () => {
 
         {/* Penjelasan singkat */}
         <Text
-          fontSize={["lg", "xl"]}
-          fontWeight="semibold"
+          fontSize={"l"}
+          fontWeight="medium"
           textAlign="center"
-          mb={8}
+          mb={9}
         >
           Jika Anda memiliki pertanyaan atau ingin memberikan masukan, kami sangat menghargainya. 
           Silakan hubungi kami melalui kontak yang tertera atau formulir di bawah ini.
@@ -67,28 +68,28 @@ const KontakKami = () => {
                   <MapPinned size={24} color="#AD5738" />
                   <Text fontSize="xl" fontWeight="bold" ml={3}>Alamat</Text>
                 </Flex>
-                <Text fontSize="md" ml={27}>Jl. CozyFinders, No. 03, Kelurahan VocaBee, Kecamatan FS-B, Yogyakarta</Text>
+                <Text fontSize="md" ml={10}>Jl. CozyFinders, No. 03, Kelurahan VocaBee, Kecamatan FS-B, Yogyakarta</Text>
 
                 {/* Telepon */}
                 <Flex align="center">
                   <Phone size={24} color="#AD5738" />
                   <Text fontSize="xl" fontWeight="bold" ml={3}>Telepon</Text>
                 </Flex>
-                <Text fontSize="md" ml={27}>(0283) 1188271</Text>
+                <Text fontSize="md" ml={10}>(0283) 1188271</Text>
 
                 {/* Email */}
                 <Flex align="center">
                   <Mail size={24} color="#AD5738" />
                   <Text fontSize="xl" fontWeight="bold" ml={3}>Email</Text>
                 </Flex>
-                <Text fontSize="md" ml={27}>findyourplace@gmail.com</Text>
+                <Text fontSize="md" ml={10}>findyourplace@gmail.com</Text>
 
                 {/* WhatsApp */}
                 <Flex align="center">
                   <PhoneCall size={24} color="#AD5738" />
                   <Text fontSize="xl" fontWeight="bold" ml={3}>WhatsApp</Text>
                 </Flex>
-                <Text fontSize="md" ml={27}>+62 811 2345 6789</Text>
+                <Text fontSize="md" ml={10}>+62 811 2345 6789</Text>
               </Stack>
             </Box>
           </GridItem>
@@ -104,7 +105,7 @@ const KontakKami = () => {
               boxShadow="lg"
               p={6}
             >
-              <Heading fontSize="xl" fontWeight="bold" mb={4}>Kirim Pesan</Heading>
+              <Heading fontSize="xl" fontWeight="bold" mb={4} textAlign={"center"}>Kirim Pesan</Heading>
               
               {/* Formulir */}
               <form onSubmit={handleSubmit}>
@@ -118,6 +119,9 @@ const KontakKami = () => {
                     variant="unstyled" // Menggunakan garis bawah
                     borderBottom="2px solid #AD5738"
                     _focus={{ borderBottom: "2px solid #AD5738" }} // Fokus dengan warna garis bawah
+                    _placeholder={{
+                      lineHeight: "48px", // Placeholder di tengah vertikal
+                    }}
                   />
 
                   {/* Email */}
@@ -129,18 +133,25 @@ const KontakKami = () => {
                     variant="unstyled"
                     borderBottom="2px solid #AD5738"
                     _focus={{ borderBottom: "2px solid #AD5738" }} 
+                    _placeholder={{
+                      lineHeight: "48px", // Placeholder di tengah vertikal
+                    }}
                   />
+                  
 
                   {/* Pesan */}
                   <Textarea
                     name="pesan"
                     value={formData.pesan}
                     onChange={handleInputChange}
-                    placeholder="Isi pesan yang ingin disampaikan"
+                    placeholder="Isi Pesan"
                     variant="unstyled"
                     borderBottom="2px solid #AD5738"
                     _focus={{ borderBottom: "2px solid #AD5738" }}
-                    resize="vertical" // Agar textarea bisa di-resize secara vertikal
+                    resize="h" // Agar textarea bisa di-resize secara vertikal
+                    _placeholder={{
+                      lineHeight: "48px", // Placeholder di tengah vertikal
+                    }}
                   />
 
                   {/* Tombol Kirim */}
