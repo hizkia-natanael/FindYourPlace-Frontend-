@@ -1,28 +1,29 @@
-import React, { useState } from "react";
-import { Box, VStack, HStack, Flex} from "@chakra-ui/react";
-import { Avatar } from "../../components/ui/avatar";
-import { Text } from "@chakra-ui/react";
-import { Button } from "@chakra-ui/react";
-import { Heading } from "@chakra-ui/react";
-import { Input } from "@chakra-ui/react";
-import { useNavigate } from "react-router-dom"; 
+import React, { useState, useEffect } from "react";
+import { Box, VStack, HStack, Flex, Text, Button, Heading, Input } from "@chakra-ui/react";
+import { Avatar } from "../../components/ui/avatar";  // Mengasumsikan Avatar adalah komponen kustom.
 
-const Profile = () => {
+const EditProfile = () => {
+  // State untuk formulir profil
   const [name, setName] = useState("Sarah");
   const [email, setEmail] = useState("sarah@gmail.com");
   const [password, setPassword] = useState("********");
+  const [isEditing, setIsEditing] = useState(true); // Awalnya dalam mode edit
+  const [initialData, setInitialData] = useState({ name: "Sarah", email: "sarah@gmail.com", password: "********" });
 
-  const navigate = useNavigate(); // Inisialisasi useNavigate
+  // Menambahkan efek untuk memeriksa perubahan
+  useEffect(() => {
+    setInitialData({ name, email, password });
+  }, [name, email, password]);
 
-  const handleSignOut = () => {
-    console.log("User has signed out!");
-    // Tambahkan logika untuk mengarahkan pengguna ke halaman login setelah sign out
-    navigate("/login"); // Ganti dengan path yang sesuai untuk halaman login
+  // Fungsi untuk menyimpan perubahan
+  const handleSaveChanges = () => {
+    console.log("Menyimpan perubahan...");
+    // Logika untuk menyimpan perubahan dapat ditambahkan di sini
+    setIsEditing(false); // Setelah menyimpan perubahan, keluar dari mode edit
   };
 
-  const handleEditProfile = () => {
-    navigate("/edit-profile"); // Arahkan ke halaman EditProfile.jsx
-  };
+  // Memeriksa apakah ada perubahan pada form
+  const isFormChanged = name !== initialData.name || email !== initialData.email || password !== initialData.password;
 
   return (
     <Box bg="gray.100" minH="100vh" p={1}>
@@ -48,7 +49,7 @@ const Profile = () => {
         <Avatar size="lg" src="https://bit.ly/dan-abramov" />
       </Flex>
 
-      {/* Profile Section */}
+      {/* Bagian Profil */}
       <Box
         bg="white"
         maxW="md"
@@ -58,27 +59,29 @@ const Profile = () => {
         borderRadius="lg"
         shadow="lg"
       >
-        {/* Heading */}
-        <Heading as="h2" size="xl" textAlign="center" color="#a04925" fontWeight={"extrabold"} mb={6}>
-          PROFIL PENGGUNA
+        {/* Judul Profil */}
+        <Heading as="h2" size="xl" textAlign="center" color="#a04925" fontWeight="extrabold" mb={6}>
+          EDIT PROFIL
         </Heading>
 
-        {/* Avatar and Name */}
-        <VStack spacing={4}>
+        {/* Avatar dan Nama */}
+        <VStack spacing={4} mb={6}>
           <Avatar
             size="2xl"
             name={name}
             src="https://bit.ly/dan-abramov"
             border="4px"
+            cursor="pointer" // Membuat avatar dapat diklik untuk mengedit
+            onClick={() => console.log("Ganti foto profil")}
           />
           <Text fontSize="lg" fontWeight="bold" color="gray.700">
             {name}
           </Text>
         </VStack>
 
-        {/* Form */}
-        <VStack spacing={4} mt={6}>
-          {/* Nama */}
+        {/* Formulir Edit Profil */}
+        <VStack spacing={4}>
+          {/* Kolom Nama */}
           <Box w="full">
             <Text mb={1} fontWeight="medium" color="gray.700">
               Nama
@@ -89,10 +92,11 @@ const Profile = () => {
               placeholder="Sarah"
               variant="outline"
               focusBorderColor="orange.400"
+              isDisabled={!isEditing} // Disable input jika tidak dalam mode edit
             />
           </Box>
 
-          {/* Email */}
+          {/* Kolom Email */}
           <Box w="full">
             <Text mb={1} fontWeight="medium" color="gray.700">
               Email
@@ -104,10 +108,11 @@ const Profile = () => {
               type="email"
               variant="outline"
               focusBorderColor="orange.400"
+              isDisabled={!isEditing} // Disable input jika tidak dalam mode edit
             />
           </Box>
 
-          {/* Password */}
+          {/* Kolom Password */}
           <Box w="full">
             <Text mb={1} fontWeight="medium" color="gray.700">
               Password
@@ -119,29 +124,23 @@ const Profile = () => {
               type="password"
               variant="outline"
               focusBorderColor="orange.400"
+              isDisabled={!isEditing} // Disable input jika tidak dalam mode edit
             />
           </Box>
         </VStack>
 
-        {/* Buttons */}
+        {/* Bagian Tombol */}
         <HStack spacing={4} mt={8}>
+          {/* Tombol Simpan */}
           <Button
-            bg="#a04925"
+            bg="green.600"
             color="white"
             flex="1"
-            _hover={{ bg: "orange.600" }}
-            onClick={handleEditProfile} // Fungsi untuk mengarahkan ke EditProfile
+            _hover={{ bg: "green.700" }}
+            onClick={handleSaveChanges} // Fungsi untuk menyimpan perubahan
+            isDisabled={!isFormChanged || !isEditing} // Disable tombol jika tidak ada perubahan atau dalam mode non-edit
           >
-            Edit Profil
-          </Button>
-          <Button
-            bg="red.600"
-            color="white"
-            flex="1"
-            _hover={{ bg: "red." }}
-            onClick={handleSignOut}
-          >
-            Sign Out
+            Simpan Perubahan
           </Button>
         </HStack>
       </Box>
@@ -149,4 +148,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default EditProfile;
