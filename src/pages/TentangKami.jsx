@@ -44,14 +44,14 @@ const TentangKami = () => {
   ];
 
   const SectionHeader = ({ title, isButton = false, onClick }) => (
-    <Flex w="full" justifyContent="center" my={4}>
+    <Flex w="full" justifyContent="center" my={8}>
       {isButton ? (
         <Button
           onClick={onClick}
           bg="#C66E4E"
           color="white"
           px={6}
-          py={3}
+          py={5}
           fontSize="xl"
           fontWeight="semibold"
           _hover={{ bg: "#a6553f" }}
@@ -123,24 +123,30 @@ const TentangKami = () => {
           TENTANG KAMI
         </Heading>
 
-        {/* Centered introductory paragraph */}
-        <Text 
-          fontSize={["lg", "xl"]} 
-          fontWeight="semibold" 
-          textAlign="center" 
-          mb={8}
-        >
-          NONGKRONG BUKAN HANYA SOAL WAKTU LUANG, TAPI TENTANG MENCIPTAKAN MOMEN BERMAKNA. 
-          BERSAMA FINDYOURPLACE, KAMI BANTU WUJUDKAN ITU.
-        </Text>
+       {/* Centered introductory paragraph */}
+<Text
+  p={3}
+  fontSize="l"
+  fontWeight="semibold"
+  textAlign="center"
+  mb={8}
+>
+  Nongkrong bukan hanya soal waktu luang, tapi tentang menciptakan momen bermakna. 
+  Bersama <Text as="span" color="orange.600" fontWeight="bold">FindYourPlace</Text>, kami membantu mewujudkan moment berhargamu.
+</Text>
 
-        {/* "Misi Kami" section */}
+       {/* "Misi Kami" section */}
         <SectionHeader title="Misi Kami" />
+        <Box mt={19}> {/* Tambahkan margin-top untuk memberikan jarak */}
         <ItemSection items={missionItems} />
+        </Box>
 
-        {/* "Mengapa Memilih Kami" section */}
-        <SectionHeader title="Mengapa Memilih Kami" />
-        <ItemSection items={whyChooseItems} />
+      {/* "Mengapa Memilih Kami" section */}
+      <SectionHeader title="Mengapa Memilih Kami" />
+      <Box mt={19}> {/* Tambahkan margin-top untuk memberikan jarak */}
+      <ItemSection items={whyChooseItems} />
+      </Box>
+
 
         {/* Additional paragraph */}
         <Text 
@@ -149,8 +155,9 @@ const TentangKami = () => {
           textAlign="center" 
           mt={8} 
           mb={8}
+          fontStyle={"italic"}
         >
-          Bersama FindYourPlace, pengalaman nongkrongmu jadi lebih mudah dan menyenangkan.
+          Bersama <Text as="span" color="orange.600" fontWeight="bold">FindYourPlace</Text>, pengalaman nongkrongmu jadi lebih mudah dan menyenangkan.
         </Text>
 
         {/* Centered button */}
