@@ -1,28 +1,32 @@
 import React, { useState, useEffect } from "react";
 import { Box, VStack, HStack, Flex, Text, Button, Heading, Input } from "@chakra-ui/react";
-import { Avatar } from "../../components/ui/avatar";  // Mengasumsikan Avatar adalah komponen kustom.
+import { Avatar } from "../../components/ui/avatar";  // Assuming Avatar is a custom component.
+import { IoCaretBack } from "react-icons/io5";  // Importing IoCaretBack icon
+import { useNavigate } from "react-router-dom";  // Import useNavigate from react-router-dom
 
 const EditProfile = () => {
-  // State untuk formulir profil
+  const navigate = useNavigate();  // Initialize the navigate function
+
+  // State for profile form
   const [name, setName] = useState("Sarah");
   const [email, setEmail] = useState("sarah@gmail.com");
   const [password, setPassword] = useState("********");
-  const [isEditing, setIsEditing] = useState(true); // Awalnya dalam mode edit
+  const [isEditing, setIsEditing] = useState(true); // Initially in edit mode
   const [initialData, setInitialData] = useState({ name: "Sarah", email: "sarah@gmail.com", password: "********" });
 
-  // Menambahkan efek untuk memeriksa perubahan
+  // Adding effect to check for changes
   useEffect(() => {
     setInitialData({ name, email, password });
   }, [name, email, password]);
 
-  // Fungsi untuk menyimpan perubahan
+  // Function to save changes
   const handleSaveChanges = () => {
-    console.log("Menyimpan perubahan...");
-    // Logika untuk menyimpan perubahan dapat ditambahkan di sini
-    setIsEditing(false); // Setelah menyimpan perubahan, keluar dari mode edit
+    console.log("Saving changes...");
+    // Logic to save changes can be added here
+    setIsEditing(false); // Exit edit mode after saving
   };
 
-  // Memeriksa apakah ada perubahan pada form
+  // Check if there are changes in the form
   const isFormChanged = name !== initialData.name || email !== initialData.email || password !== initialData.password;
 
   return (
@@ -49,7 +53,7 @@ const EditProfile = () => {
         <Avatar size="lg" src="https://bit.ly/dan-abramov" />
       </Flex>
 
-      {/* Bagian Profil */}
+      {/* Profile Section */}
       <Box
         bg="white"
         maxW="md"
@@ -59,29 +63,37 @@ const EditProfile = () => {
         borderRadius="lg"
         shadow="lg"
       >
-        {/* Judul Profil */}
-        <Heading as="h2" size="xl" textAlign="center" color="#a04925" fontWeight="extrabold" mb={6}>
-          EDIT PROFIL
-        </Heading>
+        {/* Edit Profile Title */}
+        <Flex align="center" mb={6}>
+          <IoCaretBack 
+            size={45} 
+            cursor="pointer" 
+            color="orange.500" 
+            onClick={() => navigate("/profile")} // Redirect to profile page when clicked
+          />
+          <Heading as="h2" size="x1" textAlign="center" color="#a04925" fontWeight="extrabold" flex="1">
+            EDIT PROFIL
+          </Heading>
+        </Flex>
 
-        {/* Avatar dan Nama */}
+        {/* Avatar and Name */}
         <VStack spacing={4} mb={6}>
           <Avatar
             size="2xl"
             name={name}
             src="https://bit.ly/dan-abramov"
             border="4px"
-            cursor="pointer" // Membuat avatar dapat diklik untuk mengedit
-            onClick={() => console.log("Ganti foto profil")}
+            cursor="pointer" // Making avatar clickable for editing
+            onClick={() => console.log("Change profile picture")}
           />
           <Text fontSize="lg" fontWeight="bold" color="gray.700">
             {name}
           </Text>
         </VStack>
 
-        {/* Formulir Edit Profil */}
+        {/* Edit Profile Form */}
         <VStack spacing={4}>
-          {/* Kolom Nama */}
+          {/* Name Field */}
           <Box w="full">
             <Text mb={1} fontWeight="medium" color="gray.700">
               Nama
@@ -92,11 +104,11 @@ const EditProfile = () => {
               placeholder="Sarah"
               variant="outline"
               focusBorderColor="orange.400"
-              isDisabled={!isEditing} // Disable input jika tidak dalam mode edit
+              isDisabled={!isEditing} // Disable input when not in edit mode
             />
           </Box>
 
-          {/* Kolom Email */}
+          {/* Email Field */}
           <Box w="full">
             <Text mb={1} fontWeight="medium" color="gray.700">
               Email
@@ -108,11 +120,11 @@ const EditProfile = () => {
               type="email"
               variant="outline"
               focusBorderColor="orange.400"
-              isDisabled={!isEditing} // Disable input jika tidak dalam mode edit
+              isDisabled={!isEditing} // Disable input when not in edit mode
             />
           </Box>
 
-          {/* Kolom Password */}
+          {/* Password Field */}
           <Box w="full">
             <Text mb={1} fontWeight="medium" color="gray.700">
               Password
@@ -124,21 +136,21 @@ const EditProfile = () => {
               type="password"
               variant="outline"
               focusBorderColor="orange.400"
-              isDisabled={!isEditing} // Disable input jika tidak dalam mode edit
+              isDisabled={!isEditing} // Disable input when not in edit mode
             />
           </Box>
         </VStack>
 
-        {/* Bagian Tombol */}
+        {/* Buttons */}
         <HStack spacing={4} mt={8}>
-          {/* Tombol Simpan */}
+          {/* Save Button */}
           <Button
             bg="green.600"
             color="white"
             flex="1"
             _hover={{ bg: "green.700" }}
-            onClick={handleSaveChanges} // Fungsi untuk menyimpan perubahan
-            isDisabled={!isFormChanged || !isEditing} // Disable tombol jika tidak ada perubahan atau dalam mode non-edit
+            onClick={handleSaveChanges} // Function to save changes
+            isDisabled={!isFormChanged || !isEditing} // Disable button if no changes or not in edit mode
           >
             Simpan Perubahan
           </Button>
