@@ -40,9 +40,9 @@ const ReviewGambar = ({ selectedPlace, onBack }) => {
   return (
     <div className="px-6 sm:px-10 lg:px-16 py-12 bg-gray-100">
       <button
-        className="bg-gray-300 text-black px-4 py-2 rounded-md mb-4 hover:bg-gray-400 transition"
-        onClick={onBack}
-      >
+  className="bg-gray-300 text-black px-4 py-2 rounded-md mb-4 mt-16 hover:bg-gray-400 transition"
+  onClick={onBack}
+>
         ← Kembali ke Daftar Tempat
       </button>
       <div className="mb-8">
