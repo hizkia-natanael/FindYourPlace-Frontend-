@@ -9,7 +9,7 @@ import TentangKami from "../pages/TentangKami";
 import DaftarTempat from "../pages/Daftar Tempat/DaftarTempat";
 import ReviewGambar from "../pages/Daftar Tempat/ReviewGambar";
 import KontakKami from "../pages/KontakKami";
-import Profile from "../pages/profile/profile";
+import Profile from "../pages/Profile/Profile";
 const router = createBrowserRouter([
   {
     path: "/",
