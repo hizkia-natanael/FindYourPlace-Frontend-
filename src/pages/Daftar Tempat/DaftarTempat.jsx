@@ -1,29 +1,16 @@
-import React, { useState } from "react";
-import { SearchBar } from "../../components/molekules";
+import React, { useEffect, useState } from "react";
+import { Card, SearchBar } from "../../components/molekules";
+import usePlaceStore from "../../config/placeStore.js";
 const DaftarTempat = () => {
-  const [searchTerm, setSearchTerm] = useState(""); // State untuk search input
-  const [places] = useState([
-    {
-      image: "/images/Kupiku Coffe Umbulharjo.jpg",
-      title: "Kupiku Coffe Umbulharjo",
-    },
-    {
-      image: "/images/blanco-coffee-book.jpg",
-      title: "Blanco Coffee and Books",
-    },
-    {
-      image: "/images/Oppio coffe.jpg",
-      title: "Oppio Coffee",
-    },
-    {
-      image: "/images/Carney Co.jpg",
-      title: "Carney Co  Cafe",
-    },
-  ]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const { places, getPlaces } = usePlaceStore();
 
-  // Filter tempat berdasarkan search term
+  useEffect(() => {
+    getPlaces();
+  }, [getPlaces]);
+
   const filteredPlaces = places.filter((place) =>
-    place.title.toLowerCase().includes(searchTerm.toLowerCase())
+    place.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
@@ -41,7 +28,6 @@ const DaftarTempat = () => {
 
         {/* Header teks di kiri */}
         <h2 className="text-2xl md:text-3xl text-black font-bold text-left">
-          <span className="mr-3">⭐</span>
           Temukan{" "}
           <span className="text-[#a04925] ml-3 mr-1">tempat nongkrong</span>
           favoritmu
@@ -52,21 +38,11 @@ const DaftarTempat = () => {
       <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredPlaces.length > 0 ? (
           filteredPlaces.map((place, index) => (
-            <div
-              key={index}
-              className="bg-white shadow-lg rounded-lg overflow-hidden hover:shadow-xl hover:scale-105 transition-transform duration-300"
-            >
-              <img
-                src={place.image}
-                alt={place.title}
-                className="w-full h-52 object-cover"
-              />
-              <div className="p-4 text-center">
-                <h3 className="text-lg font-semibold text-gray-800">
-                  {place.title}
-                </h3>
-              </div>
-            </div>
+            <Card
+              index={index}
+              name={place.name}
+              image={`http://localhost:3000/uploads/${place.image}`}
+            />
           ))
         ) : (
           <p className="text-gray-600 col-span-3 text-center">

@@ -6,9 +6,6 @@ const HomePage = () => {
     <div className="font-poppins bg-white">
       <HeroSection />
       <div className="mt-8">
-        <div>
-          <RatingSection />
-        </div>
         <FindYourPlace />
       </div>
     </div>
