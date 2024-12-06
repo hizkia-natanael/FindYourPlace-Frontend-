@@ -45,7 +45,6 @@ const ReviewGambar = ({ selectedPlace, onBack }) => {
 >
         ← Kembali ke Daftar Tempat
       </button>
-      <div>Haloo Dunia</div>
       <div className="mb-8">
         <h1 className="text-3xl font-bold mb-4 text-[#a04925]">{selectedPlace.title}</h1>
         <div className="flex space-x-4 mb-4">
