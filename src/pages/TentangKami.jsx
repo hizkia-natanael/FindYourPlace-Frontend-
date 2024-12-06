@@ -65,14 +65,14 @@ const TentangKami = () => {
   ];
 
   const SectionHeader = ({ title, isButton = false, onClick }) => (
-    <Flex w="full" justifyContent="center" my={4}>
+    <Flex w="full" justifyContent="center" my={8}>
       {isButton ? (
         <Button
           onClick={onClick}
           bg="#C66E4E"
           color="white"
           px={6}
-          py={3}
+          py={5}
           fontSize="xl"
           fontWeight="semibold"
           _hover={{ bg: "#a6553f" }}
@@ -119,54 +119,56 @@ const TentangKami = () => {
 
   return (
     <Box minH="100vh" bg="white" color="black" pt={20} pb={8} px={[4, 10]}>
-      <Container maxW="4xl" className="mt-10">
-        {/* Centered "TENTANG KAMI" heading */}
+      <Container maxW="4xl">
         <Heading
           textAlign="center"
           color="#AD5738"
           mb={6}
           fontSize={["3xl", "5xl"]}
           fontWeight="bold"
+          pt={12}
         >
           TENTANG KAMI
         </Heading>
-
-        {/* Centered introductory paragraph */}
         <Text
           fontSize={["lg", "xl"]}
           fontWeight="semibold"
           textAlign="center"
           mb={8}
         >
-          NONGKRONG BUKAN HANYA SOAL WAKTU LUANG, TAPI TENTANG MENCIPTAKAN MOMEN
-          BERMAKNA. BERSAMA FINDYOURPLACE, KAMI BANTU WUJUDKAN ITU.
+          Nongkrong bukan hanya soal waktu luang, tapi tentang menciptakan momen
+          bermakna. Bersama{" "}
+          <Text as="span" color="orange.600" fontWeight="bold">
+            FindYourPlace
+          </Text>
+          , kami membantu mewujudkan moment berhargamu.
         </Text>
-
-        {/* "Misi Kami" section */}
         <SectionHeader title="Misi Kami" />
-        <ItemSection items={missionItems} />
-
-        {/* "Mengapa Memilih Kami" section */}
+        <Box mt={4}>
+          <ItemSection items={missionItems} />
+        </Box>
         <SectionHeader title="Mengapa Memilih Kami" />
-        <ItemSection items={whyChooseItems} />
-
-        {/* Additional paragraph */}
+        <Box mt={4}>
+          <ItemSection items={whyChooseItems} />
+        </Box>
         <Text
           fontSize="md"
           fontWeight="medium"
           textAlign="center"
           mt={8}
           mb={8}
+          fontStyle={"italic"}
         >
-          Bersama FindYourPlace, pengalaman nongkrongmu jadi lebih mudah dan
-          menyenangkan.
+          Bersama{" "}
+          <Text as="span" color="orange.600" fontWeight="bold">
+            FindYourPlace
+          </Text>
+          , pengalaman nongkrongmu jadi lebih mudah dan menyenangkan.
         </Text>
-
-        {/* Centered button */}
         <SectionHeader
           title="Telusuri Sekarang"
           isButton
-          onClick={() => navigate("/telusuri")}
+          onClick={() => navigate("/daftar-tempat")}
         />
       </Container>
     </Box>

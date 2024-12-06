@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button, HamburgerMenu, Logo } from "../../atoms";
+import { FaUserCircle } from "react-icons/fa";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -35,13 +36,21 @@ const Header = () => {
             Kontak
           </Link>
         </nav>
-        <Link to="/login">
-          <Button className="hidden md:flex bg-[#c66e4e] text-white">
-            Login
-          </Button>
-        </Link>
 
-        {/* hamburger icon */}
+        {/* Login Button with Icon */}
+        <div className="hidden md:flex items-center">
+          {/* Icon FaUserCircle with Link */}
+          <Link to="/profile" className="mr-4">
+            <FaUserCircle className="text-4xl text-gray-700" />
+          </Link>
+          <Link to="/login">
+            <Button className="bg-[#c66e4e] text-white">
+              Login
+            </Button>
+          </Link>
+        </div>
+
+        {/* Hamburger Icon */}
         <div className="md:hidden flex items-center">
           <Button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -52,7 +61,7 @@ const Header = () => {
         </div>
       </div>
 
-      {/* Mobile */}
+      {/* Mobile Menu */}
       {isMenuOpen && (
         <div className="md:hidden bg-white bg-opacity-100 shadow-md py-4 px-6">
           <nav className="flex flex-col gap-4">
@@ -80,11 +89,17 @@ const Header = () => {
             >
               Kontak
             </Link>
-            <Link to={"/login"}>
-              <Button className="bg-[#c66e4e] font-medium text-white">
-                Login
-              </Button>
-            </Link>
+            <div className="flex items-center gap-4">
+              {/* Icon FaUserCircle for Mobile */}
+              <Link to="/profile">
+                <FaUserCircle className="text-2xl text-gray-700" />
+              </Link>
+              <Link to="/login">
+                <Button className="bg-[#c66e4e] font-medium text-white">
+                  Login
+                </Button>
+              </Link>
+            </div>
           </nav>
         </div>
       )}

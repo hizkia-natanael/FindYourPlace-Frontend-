@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Menggunakan font Poppins untuk seluruh aplikasi */
+* {
+  font-family: 'Poppins', sans-serif;
+}
