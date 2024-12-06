@@ -39,7 +39,7 @@ const router = createBrowserRouter([
         element: <KontakKami />,
       },
       {
-        path: "/review-gambar",
+        path: "/review-gambar/:id",
         element: <ReviewGambar />,
       },
       {
@@ -47,7 +47,7 @@ const router = createBrowserRouter([
         element: <Profile />,
       },
       {
-        path: "/edit-profile", 
+        path: "/edit-profile",
         element: <EditProfile />,
       },
     ],
@@ -64,11 +64,6 @@ const router = createBrowserRouter([
     path: "/register",
     element: <RegisterPage />,
   },
-  {
-    path: "/review-admin",
-    element: <ReviewAdmin />,
-  },
-  
 ]);
 
 export default router;

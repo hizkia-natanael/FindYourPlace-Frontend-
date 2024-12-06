@@ -2,7 +2,7 @@ import React from "react";
 
 const InfoSection = () => {
   return (
-    <div className="flex flex-col sm:flex-row items-start  justify-between text-black bg-white p-6 sm:p-10 rounded-lg shadow-lg">
+    <div className="flex flex-col sm:flex-row items-start  justify-between text-black bg-white p-6 sm:p-10 rounded-lg shadow-lg font-poppins">
       <div className="flex gap-4 mb-6  sm:mb-0">
         <div className="w-36 h-44  bg-gray-300 rounded-md shadow-md hidden sm:block overflow-hidden">
           <img
