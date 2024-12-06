@@ -1,28 +1,9 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import {
-  HStack,
-  VStack,
-  Box,
-  Text,
-  Button,
-  Image,
-  Table,
-  Thead,
-  Tbody,
-  Tr,
-  Th,
-  Td,
-  IconButton,
-  Select,
-  Input,
-  InputGroup,
-  InputLeftElement,
-} from '@chakra-ui/react';
-import Logo from '../../assets/logo.svg';
 import { MdLogout, MdOutlinePlace } from 'react-icons/md';
 import { FaHome, FaUser, FaEye, FaEdit, FaTrash, FaSearch } from 'react-icons/fa';
 import { IoIosChatbubbles } from 'react-icons/io';
+import Logo from '../../assets/logo.svg';
 
 const UserAdmin = () => {
   const navigate = useNavigate();
@@ -40,122 +21,118 @@ const UserAdmin = () => {
   ];
 
   return (
-    <Box bg="#E8E8E8" minHeight="100vh">
+    <div className="bg-[#E8E8E8] min-h-screen">
       {/* Header */}
-      <Box bg={"#FFFFFF"} w={"full"} h={"100"} px={"8"} display={"flex"} alignItems={"center"}>
-        <Image src={Logo} />
-      </Box>
+      <div className="bg-white w-full h-[100px] px-8 flex items-center">
+        <img src={Logo} alt="Logo" />
+      </div>
 
       {/* Main Content */}
-      <HStack h={"89vh"} display={"flex"} alignItems={"flex-start"} w={"full"} position={"relative"} top={"1vh"}>
+      <div className="flex h-[89vh] items-start w-full relative top-[1vh]">
         {/* Sidebar */}
-        <VStack bg={"#FFFFFF"} w={"252px"} p={"10"} borderRadius={"0 0 10px 0"} h={"full"}>
-          <Image
+        <div className="bg-white w-[252px] p-10 rounded-br-lg h-full flex flex-col items-center">
+          <img
             src="https://i.pinimg.com/564x/86/b0/5b/86b05b5f1bdca7da73f0d89651ccb186.jpg"
-            borderRadius={"full"}
-            w="120px"
-            h="120px"
-            marginY={"3"}
+            alt="Profile"
+            className="rounded-full w-[120px] h-[120px] my-3"
           />
-          <Box w={"100%"} marginTop={"2"}>
-            <Text color={"#000000"} fontWeight={"normal"} textAlign={"center"}>
-              Welcome, <Text as="b">Natan</Text>!
-            </Text>
-            <Text color={"#000000"} fontWeight={"bold"} textAlign={"center"}>
+          <div className="w-full mt-2">
+            <p className="text-black text-center">
+              Welcome, <span className="font-bold">Natan</span>!
+            </p>
+            <p className="text-black font-bold text-center">
               Admin
-            </Text>
-          </Box>
-          <Button
-            p={"4"}
-            w={"full"}
-            h={"40px"}
-            color={"#000000"}
-            backgroundColor={"#C66E4E"}
-            justifyContent={"flex-start"}
+            </p>
+          </div>
+          <button
+            className="p-4 w-full h-[40px] text-black flex items-center justify-start mb-2"
             onClick={() => navigate('/')}
           >
-            <FaHome /> Dashboard
-          </Button>
-          <Button
-            p={"4"}
-            w={"full"}
-            h={"40px"}
-            color={"#000000"}
-            backgroundColor={"#FFFFFF"}
-            justifyContent={"flex-start"}
+            <FaHome className="mr-2" /> Dashboard
+          </button>
+          <button
+            className="p-4 w-full h-[40px] text-black bg-[#C66E4E] flex items-center justify-start mb-2"
             onClick={() => navigate('/users')}
           >
-            <FaUser /> Users
-          </Button>
-          <Button p={"4"} w={"full"} h={"40px"} color={"#000000"} backgroundColor={"#FFFFFF"} justifyContent={"flex-start"}>
-            <MdOutlinePlace /> Places
-          </Button>
-          <Button p={"4"} w={"full"} h={"40px"} color={"#000000"} backgroundColor={"#FFFFFF"} justifyContent={"flex-start"}>
-            <IoIosChatbubbles /> Reviews
-          </Button>
+            <FaUser className="mr-2" /> Users
+          </button>
+          <button className="p-4 w-full h-[40px] text-black bg-white flex items-center justify-start mb-2">
+            <MdOutlinePlace className="mr-2" /> Places
+          </button>
+          <button className="p-4 w-full h-[40px] text-black bg-white flex items-center justify-start mb-2">
+            <IoIosChatbubbles className="mr-2" /> Reviews
+          </button>
 
-          <Button w={"130px"} h={"40px"} backgroundColor={"#C66E4E"} onClick={() => navigate('/')} top={"5"}>
-            <MdLogout /> Sign out
-          </Button>
-        </VStack>
+          <button 
+            className="w-[130px] h-[40px] bg-[#C66E4E] mt-5"
+            onClick={() => navigate('/')}
+          >
+            <MdLogout className="inline-block mr-2" /> Sign out
+          </button>
+        </div>
 
         {/* Main Panel */}
-        <VStack
-          bg={"#FFFFFF"}
-          flex={1}
-          h={"full"}
-          borderRadius={"10px"}
-          p={"16"}
-          ml={"8"}
-          spacing={4}
-          gap={"10"}
-          alignItems="flex-start"
-        >
+        <div className="bg-white flex-1 h-full rounded-lg p-16 ml-8 flex flex-col space-y-4 items-start">
           {/* Header Controls */}
-          <HStack justifyContent={"space-between"} w={"full"} mb={4}>
-            <Button bg={"#C66E4E"} color={"white"}>+ Tambah User</Button>
-            <HStack>
-              <Select placeholder="Sort By: latest" w={"150px"} />
-              <Select placeholder="Show: 10" w={"100px"} />
-            </HStack>
-          </HStack>
+          <div className="flex justify-between w-full mb-4">
+            <button className="bg-[#C66E4E] text-white px-4 py-2">+ Tambah User</button>
+            <div className="flex space-x-2">
+              <select className="w-[150px] border rounded px-2 py-1">
+                <option>Sort By: latest</option>
+              </select>
+              <select className="w-[100px] border rounded px-2 py-1">
+                <option>Show: 10</option>
+              </select>
+            </div>
+          </div>
 
           {/* Search Bar */}
-          <InputGroup mb={4} w={"full"}>
-            <InputLeftElement pointerEvents="none" children={<FaSearch color="gray.300" />} />
-            <Input type="text" placeholder="Cari Xxxxxxx" />
-          </InputGroup>
+          <div className="relative w-full mb-4">
+            <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-300" />
+            <input 
+              type="text" 
+              placeholder="Cari Xxxxxxx" 
+              className="w-full pl-10 pr-3 py-2 border rounded"
+            />
+          </div>
 
           {/* Users Table */}
-          <Table variant="simple" colorScheme="gray" size="sm">
-            <Thead>
-              <Tr>
-                <Th>No</Th>
-                <Th>Nama</Th>
-                <Th>Email</Th>
-                <Th>Aksi</Th>
-              </Tr>
-            </Thead>
-            <Tbody>
-              {users.map((user, index) => (
-                <Tr key={user.id}>
-                  <Td>{index + 1}</Td>
-                  <Td>{user.name}</Td>
-                  <Td>{user.email}</Td>
-                  <Td>
-                    <HStack spacing={2}>
-                      <IconButton icon={<FaEye />} aria-label="View" size="sm" />
-                      <IconButton icon={<FaEdit />} aria-label="Edit" size="sm" />
-                      <IconButton icon={<FaTrash />} aria-label="Delete" size="sm" />
-                    </HStack>
-                  </Td>
-                </Tr>
-              ))}
-            </Tbody>
-          </Table>
-        </VStack>
-      </HStack>
-    </Box>
+          {/* Users Table */}
+            <table className="w-full border-collapse">
+              <thead>
+                <tr className="border-b">
+                  <th className="text-left p-2 text-black">No</th>
+                  <th className="text-left p-2 text-black">Nama</th>
+                  <th className="text-left p-2 text-black">Email</th>
+                  <th className="text-left p-2 text-black">Aksi</th>
+                </tr>
+              </thead>
+              <tbody>
+                {users.map((user, index) => (
+                  <tr key={user.id} className="border-b">
+                    <td className="p-2 text-black">{index + 1}</td>
+                    <td className="p-2 text-black">{user.name}</td>
+                    <td className="p-2 text-black">{user.email}</td>
+                    <td className="p-2">
+                      <div className="flex space-x-2">
+                        <button className="p-1 text-black hover:bg-gray-100 rounded">
+                          <FaEye />
+                        </button>
+                        <button className="p-1 text-black hover:bg-gray-100 rounded">
+                          <FaEdit />
+                        </button>
+                        <button className="p-1 text-black hover:bg-gray-100 rounded">
+                          <FaTrash />
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+        </div>
+      </div>
+    </div>
   );
 };
 
