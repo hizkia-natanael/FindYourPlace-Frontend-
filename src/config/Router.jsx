@@ -11,6 +11,8 @@ import ReviewGambar from "../pages/Daftar Tempat/ReviewGambar";
 import KontakKami from "../pages/KontakKami";
 import Profile from "../pages/Profile/Profile";
 import EditProfile from "../pages/EditProfile/EditProfile";
+import UserAdmin from "../pages/Admin/UserAdmin";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -62,7 +64,12 @@ const router = createBrowserRouter([
     path: "/register",
     element: <RegisterPage />,
   },
-  
+
+  {
+    path: "/user-admin",
+    element: <UserAdmin />
+  }
+
 ]);
 
 export default router;
