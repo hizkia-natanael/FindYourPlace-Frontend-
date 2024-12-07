@@ -12,13 +12,16 @@ import KontakKami from "../pages/KontakKami";
 import Profile from "../pages/Profile/Profile";
 import EditProfile from "../pages/EditProfile/EditProfile";
 import UserAdmin from "../pages/Admin/UserAdmin";
+import UserDetail from "../pages/Admin/UserDetail";
+import EditUser from "../pages/Admin/EditUser";
+import UserTambah from "../pages/Admin/UserTambah.jsx";
 
 const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Layout />,
-    children: [
       {
+      path: "/",
+      element: <Layout />,
+      children: [
+     {
         path: "/",
         element: <HomePage />,
       },
@@ -47,29 +50,44 @@ const router = createBrowserRouter([
         element: <Profile />,
       },
       {
-        path: "/edit-profile", 
+        path: "/edit-profile",
         element: <EditProfile />,
       },
-    ],
-  },
-  {
-    path: "/admin",
-    element: <DashboardAdmin />,
-  },
-  {
-    path: "/login",
-    element: <LoginPage />,
-  },
-  {
-    path: "/register",
-    element: <RegisterPage />,
-  },
+      ],
+      },
+      {
+        path: "/admin",
+        element: <DashboardAdmin />,
+      },
+      {
+        path: "/login",
+        element: <LoginPage />,
+      },
+      {
+        path: "/register",
+        element: <RegisterPage />,
+      },
 
-  {
-    path: "/user-admin",
-    element: <UserAdmin />
-  }
+      {
+        path: "/user-admin",
+        element: <UserAdmin />
+      },
 
-]);
+      {
+        path: "/user-detail",
+        element: <UserDetail />
+      },
+
+      {
+        path: "/edit-user",
+        element: <EditUser />
+      },
+      
+      {
+        path:"/user-tambah",
+        element: <UserTambah />
+      }
+      ]);
+
 
 export default router;
