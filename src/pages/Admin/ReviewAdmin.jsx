@@ -58,6 +58,18 @@ const UserAdmin = () => {
           </button>
           <button
             className="p-4 w-full h-[40px] text-black flex items-center justify-start mb-2"
+            onClick={() => navigate('/user-admin')}
+          >
+            <FaUser className="mr-2" /> Users
+          </button>
+          <button className="p-4 w-full h-[40px] text-black bg-white flex items-center justify-start mb-2"
+          onClick={() => navigate('/place-admin')}
+          >
+            <MdOutlinePlace className="mr-2" /> Places
+          </button>
+          <button className="p-4 w-full h-[40px] text-black bg-[#C66E4E] flex items-center justify-start mb-2"
+          onClick={() => navigate('/review-admin')}
+          >
             onClick={() => navigate('/users')}
           >
             <FaUser className="mr-2" /> Users
@@ -71,6 +83,7 @@ const UserAdmin = () => {
 
           <button 
             className="w-[130px] h-[40px] bg-[#C66E4E] mt-5"
+            onClick={() => navigate('/login')}
             onClick={() => navigate('/')}
           >
             <MdLogout className="inline-block mr-2" /> Sign out
@@ -81,6 +94,28 @@ const UserAdmin = () => {
         <div className="bg-white flex-1 h-full rounded-lg p-16 ml-8 flex flex-col space-y-4 items-start">
           {/* Header Controls */}
           <div className="flex justify-between w-full mb-4 rounded-lg">
+            <button className="bg-[#C66E4E] text-white px-4 py-2 rounded-lg" onClick={() => navigate('/tambah-review')}>
+              + Tambah Review</button>
+              <div className="flex space-x-4 items-center">
+                {/* Sort By */}
+                <div className="flex items-center space-x-2">
+                  <label className="text-gray-700 font-semibold">Sort By:</label>
+                  <select className="w-[150px] border rounded-lg px-2 py-1">
+                    <option value="latest">Terbaru</option>
+                    <option value="oldest">Terlama</option>
+                  </select>
+                </div>
+                {/* Show */}
+                <div className="flex items-center space-x-2">
+                  <label className="text-gray-700 font-semibold">Show:</label>
+                  <select className="w-[110px] border rounded-lg px-2 py-1">
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                    <option value="30">30</option>
+                    </select>
+                </div>
+              </div>
+
             <button className="bg-[#C66E4E] text-white px-4 py-2 rounded-lg">+ Tambah Review</button>
             <div className="flex space-x-2 rounded-lg">
               <select className="w-[150px] border rounded-lg px-2 py-1">
@@ -90,6 +125,7 @@ const UserAdmin = () => {
                 <option>Show: 10</option>
               </select>
             </div>
+
           </div>
 
           {/* Search Bar */}
@@ -97,7 +133,9 @@ const UserAdmin = () => {
             <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-300" />
             <input 
               type="text" 
+              placeholder="Cari Review" 
               placeholder="Cari Xxxxxxx" 
+
               className="w-full pl-10 pr-3 py-2 border rounded"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}

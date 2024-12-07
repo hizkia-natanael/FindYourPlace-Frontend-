@@ -11,6 +11,10 @@ import ReviewGambar from "../pages/Daftar Tempat/ReviewGambar";
 import KontakKami from "../pages/KontakKami";
 import Profile from "../pages/Profile/Profile";
 import EditProfile from "../pages/EditProfile/EditProfile";
+import ReviewAdmin from "../pages/Admin/ReviewAdmin";
+import DetailReview from "../pages/Admin/DetailReview";
+import EditReview from "../pages/Admin/EditReview";
+import TambahReview from "../pages/Admin/TambahReview";
 import UserAdmin from "../pages/Admin/UserAdmin";
 import UserDetail from "../pages/Admin/UserDetail";
 import EditUser from "../pages/Admin/EditUser";
@@ -67,6 +71,23 @@ const router = createBrowserRouter([
   {
     path: "/register",
     element: <RegisterPage />,
+  },
+    path: "/review-admin",
+    element: <ReviewAdmin />,
+  },
+  {
+    path: "/detail-review",
+    element: <DetailReview />,
+  },
+  {
+    path: "/edit-review",
+    element: <EditReview />,
+  },
+  {
+    path: "/tambah-review",
+    element: <TambahReview />,
+    path: "/users",
+    element: <UserAdmin />,
   },
   {
     path: "/users",
