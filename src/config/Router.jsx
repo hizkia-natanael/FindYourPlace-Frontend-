@@ -19,6 +19,7 @@ import UserAdmin from "../pages/Admin/UserAdmin";
 import UserDetail from "../pages/Admin/UserDetail";
 import EditUser from "../pages/Admin/EditUser";
 import UserTambah from "../pages/Admin/UserTambah.jsx";
+import PlacesAdmin from "../pages/Admin/PlaceAdmin.jsx";
 
 const router = createBrowserRouter([
   {
@@ -86,6 +87,10 @@ const router = createBrowserRouter([
   {
     path: "/tambah-review",
     element: <TambahReview />,
+  },
+  {
+    path: "/admin-place",
+    element: <PlacesAdmin />,
   },
   {
     path: "/users",
