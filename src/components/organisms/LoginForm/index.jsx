@@ -1,11 +1,20 @@
 import { Form } from "../../molekules";
 import { Button, Logo } from "../../atoms";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const LoginForm = () => {
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Login submitted");
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+
+    try {
+      const response = await axios.post('/api/login', { email, password });
+      console.log("Login berhasil:", response.data);
+    } catch (error) {
+      console.error("Login gagal:", error.response.data.message);
+    }
   };
 
   return (

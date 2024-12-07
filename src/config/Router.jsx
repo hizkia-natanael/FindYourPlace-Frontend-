@@ -19,7 +19,7 @@ import UserAdmin from "../pages/Admin/UserAdmin";
 import UserDetail from "../pages/Admin/UserDetail";
 import EditUser from "../pages/Admin/EditUser";
 import UserTambah from "../pages/Admin/UserTambah.jsx";
-import ReviewAdmin from "../pages/Admin/ReviewAdmin";
+import PlacesAdmin from "../pages/Admin/PlaceAdmin.jsx";
 
 const router = createBrowserRouter([
   {
@@ -72,6 +72,7 @@ const router = createBrowserRouter([
     path: "/register",
     element: <RegisterPage />,
   },
+  {
     path: "/review-admin",
     element: <ReviewAdmin />,
   },
@@ -86,8 +87,10 @@ const router = createBrowserRouter([
   {
     path: "/tambah-review",
     element: <TambahReview />,
-    path: "/users",
-    element: <UserAdmin />,
+  },
+  {
+    path: "/admin-place",
+    element: <PlacesAdmin />,
   },
   {
     path: "/users",
@@ -104,10 +107,6 @@ const router = createBrowserRouter([
   {
     path: "/user-tambah",
     element: <UserTambah />,
-  },
-  {
-    path: "/review-admin",
-    element: <ReviewAdmin />,
   },
 ]);
 
