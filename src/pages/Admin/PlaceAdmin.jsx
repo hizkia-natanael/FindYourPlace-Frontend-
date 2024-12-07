@@ -212,4 +212,4 @@ const PlacesAdmin = () => {
   );
 };
 
-export default PlacesAdmin;
+export default PlacesAdmin; 
