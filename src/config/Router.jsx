@@ -18,11 +18,11 @@ import UserTambah from "../pages/Admin/UserTambah.jsx";
 import ReviewAdmin from "../pages/Admin/ReviewAdmin";
 
 const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Layout />,
+    children: [
       {
-      path: "/",
-      element: <Layout />,
-      children: [
-     {
         path: "/",
         element: <HomePage />,
       },
@@ -47,48 +47,13 @@ const router = createBrowserRouter([
         element: <ReviewGambar />,
       },
       {
-        path: "/profile", // Tambahkan path untuk halaman profil
+        path: "/profile",
         element: <Profile />,
       },
       {
         path: "/edit-profile",
         element: <EditProfile />,
       },
-      ],
-      },
-      {
-        path: "/admin",
-        element: <DashboardAdmin />,
-      },
-      {
-        path: "/login",
-        element: <LoginPage />,
-      },
-      {
-        path: "/register",
-        element: <RegisterPage />,
-      },
-
-      {
-        path: "/user-admin",
-        element: <UserAdmin />
-      },
-
-      {
-        path: "/user-detail",
-        element: <UserDetail />
-      },
-
-      {
-        path: "/edit-user",
-        element: <EditUser />
-      },
-      
-      {
-        path:"/user-tambah",
-        element: <UserTambah />
-      }
-      ]);
     ],
   },
   {
@@ -104,10 +69,25 @@ const router = createBrowserRouter([
     element: <RegisterPage />,
   },
   {
+    path: "/users",
+    element: <UserAdmin />,
+  },
+  {
+    path: "/user-detail",
+    element: <UserDetail />,
+  },
+  {
+    path: "/edit-user",
+    element: <EditUser />,
+  },
+  {
+    path: "/user-tambah",
+    element: <UserTambah />,
+  },
+  {
     path: "/review-admin",
     element: <ReviewAdmin />,
   },
-  
 ]);
 
 export default router;
