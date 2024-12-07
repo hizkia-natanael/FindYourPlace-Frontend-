@@ -15,6 +15,7 @@ import UserAdmin from "../pages/Admin/UserAdmin";
 import UserDetail from "../pages/Admin/UserDetail";
 import EditUser from "../pages/Admin/EditUser";
 import UserTambah from "../pages/Admin/UserTambah.jsx";
+import ReviewAdmin from "../pages/Admin/ReviewAdmin";
 
 const router = createBrowserRouter([
       {
@@ -88,6 +89,25 @@ const router = createBrowserRouter([
         element: <UserTambah />
       }
       ]);
-
+    ],
+  },
+  {
+    path: "/admin",
+    element: <DashboardAdmin />,
+  },
+  {
+    path: "/login",
+    element: <LoginPage />,
+  },
+  {
+    path: "/register",
+    element: <RegisterPage />,
+  },
+  {
+    path: "/review-admin",
+    element: <ReviewAdmin />,
+  },
+  
+]);
 
 export default router;
