@@ -43,7 +43,7 @@ const router = createBrowserRouter([
         element: <KontakKami />,
       },
       {
-        path: "/review-gambar",
+        path: "/review-gambar/:id",
         element: <ReviewGambar />,
       },
       {
