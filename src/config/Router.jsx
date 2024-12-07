@@ -15,6 +15,11 @@ import ReviewAdmin from "../pages/Admin/ReviewAdmin";
 import DetailReview from "../pages/Admin/DetailReview";
 import EditReview from "../pages/Admin/EditReview";
 import TambahReview from "../pages/Admin/TambahReview";
+import UserAdmin from "../pages/Admin/UserAdmin";
+import UserDetail from "../pages/Admin/UserDetail";
+import EditUser from "../pages/Admin/EditUser";
+import UserTambah from "../pages/Admin/UserTambah.jsx";
+import ReviewAdmin from "../pages/Admin/ReviewAdmin";
 
 const router = createBrowserRouter([
   {
@@ -42,15 +47,15 @@ const router = createBrowserRouter([
         element: <KontakKami />,
       },
       {
-        path: "/review-gambar",
+        path: "/review-gambar/:id",
         element: <ReviewGambar />,
       },
       {
-        path: "/profile", // Tambahkan path untuk halaman profil
+        path: "/profile",
         element: <Profile />,
       },
       {
-        path: "/edit-profile", 
+        path: "/edit-profile",
         element: <EditProfile />,
       },
     ],
@@ -67,7 +72,6 @@ const router = createBrowserRouter([
     path: "/register",
     element: <RegisterPage />,
   },
-  {
     path: "/review-admin",
     element: <ReviewAdmin />,
   },
@@ -82,6 +86,28 @@ const router = createBrowserRouter([
   {
     path: "/tambah-review",
     element: <TambahReview />,
+    path: "/users",
+    element: <UserAdmin />,
+  },
+  {
+    path: "/users",
+    element: <UserAdmin />,
+  },
+  {
+    path: "/user-detail",
+    element: <UserDetail />,
+  },
+  {
+    path: "/edit-user",
+    element: <EditUser />,
+  },
+  {
+    path: "/user-tambah",
+    element: <UserTambah />,
+  },
+  {
+    path: "/review-admin",
+    element: <ReviewAdmin />,
   },
 ]);
 

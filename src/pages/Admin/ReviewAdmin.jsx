@@ -70,12 +70,21 @@ const UserAdmin = () => {
           <button className="p-4 w-full h-[40px] text-black bg-[#C66E4E] flex items-center justify-start mb-2"
           onClick={() => navigate('/review-admin')}
           >
+            onClick={() => navigate('/users')}
+          >
+            <FaUser className="mr-2" /> Users
+          </button>
+          <button className="p-4 w-full h-[40px] text-black bg-white flex items-center justify-start mb-2">
+            <MdOutlinePlace className="mr-2" /> Places
+          </button>
+          <button className="p-4 w-full h-[40px] text-black bg-[#C66E4E] flex items-center justify-start mb-2">
             <IoIosChatbubbles className="mr-2" /> Reviews
           </button>
 
           <button 
             className="w-[130px] h-[40px] bg-[#C66E4E] mt-5"
             onClick={() => navigate('/login')}
+            onClick={() => navigate('/')}
           >
             <MdLogout className="inline-block mr-2" /> Sign out
           </button>
@@ -107,6 +116,16 @@ const UserAdmin = () => {
                 </div>
               </div>
 
+            <button className="bg-[#C66E4E] text-white px-4 py-2 rounded-lg">+ Tambah Review</button>
+            <div className="flex space-x-2 rounded-lg">
+              <select className="w-[150px] border rounded-lg px-2 py-1">
+                <option>Sort By: latest</option>
+              </select>
+              <select className="w-[110px] border rounded-lg px-2 py-1">
+                <option>Show: 10</option>
+              </select>
+            </div>
+
           </div>
 
           {/* Search Bar */}
@@ -115,6 +134,8 @@ const UserAdmin = () => {
             <input 
               type="text" 
               placeholder="Cari Review" 
+              placeholder="Cari Xxxxxxx" 
+
               className="w-full pl-10 pr-3 py-2 border rounded"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
