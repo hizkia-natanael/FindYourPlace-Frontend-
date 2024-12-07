@@ -11,6 +11,7 @@ import ReviewGambar from "../pages/Daftar Tempat/ReviewGambar";
 import KontakKami from "../pages/KontakKami";
 import Profile from "../pages/Profile/Profile";
 import EditProfile from "../pages/EditProfile/EditProfile";
+import PlacesAdmin from "../pages/Admin/PlacesAdmin";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -61,6 +62,10 @@ const router = createBrowserRouter([
   {
     path: "/register",
     element: <RegisterPage />,
+  },
+  {
+    path: "/places-admin",
+    element: <PlacesAdmin />,
   },
   
 ]);

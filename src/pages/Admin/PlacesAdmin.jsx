@@ -10,8 +10,7 @@ const PlacesAdmin = () => {
   const navigate = useNavigate();
   const [placeName, setPlaceName] = useState('');
   const [placeDescription, setPlaceDescription] = useState('');
-  const [placeLocation, setPlaceLocation] = useState('');
-  const [placeAlamat, setPlaceAlamat] = useState('');
+  const [placeLocation, setPlaceLocation] = useState('');  // Menggunakan lokasi, bukan alamat
   const [placeFasilitas, setPlaceFasilitas] = useState('');
   const [placeHours, setPlaceHours] = useState('');
   const [placePhoneNumber, setPlacePhoneNumber] = useState('');
@@ -39,8 +38,7 @@ const PlacesAdmin = () => {
     console.log('Place Added:', {
       name: placeName,
       description: placeDescription,
-      location: placeLocation,
-      alamat: placeAlamat,
+      location: placeLocation,  // Menggunakan lokasi
       fasilitas: placeFasilitas,
       hours: placeHours,
       phoneNumber: placePhoneNumber,
@@ -50,8 +48,7 @@ const PlacesAdmin = () => {
     // Reset form after submission
     setPlaceName('');
     setPlaceDescription('');
-    setPlaceLocation('');
-    setPlaceAlamat('');
+    setPlaceLocation('');  // Reset lokasi
     setPlaceFasilitas('');
     setPlaceHours('');
     setPlacePhoneNumber('');
@@ -134,8 +131,6 @@ const PlacesAdmin = () => {
             boxShadow={"md"}
             w={"100%"}
           >
-            
-
             {/* Add New Places Title */}
             <Text fontSize={"lg"} color={"black"} fontWeight={"bold"} textAlign="center">
               Add New Places
@@ -162,14 +157,6 @@ const PlacesAdmin = () => {
               placeholder="Place Location"
               value={placeLocation}
               onChange={(e) => setPlaceLocation(e.target.value)}
-              mb={4}
-            />
-
-            {/* Alamat */}
-            <Input
-              placeholder="Alamat"
-              value={placeAlamat}
-              onChange={(e) => setPlaceAlamat(e.target.value)}
               mb={4}
             />
 

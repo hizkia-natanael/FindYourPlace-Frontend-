@@ -54,7 +54,10 @@ const DashboardAdmin = () => {
           <Button p={"4"} w={"full"} h={"40px"} color={"#000000"} backgroundColor={"#FFFFFF"} justifyContent={"flex-start"}>
             <FaUser /> Users
           </Button>
-          <Button p={"4"} w={"full"} h={"40px"} color={"#000000"} backgroundColor={"#FFFFFF"} justifyContent={"flex-start"}>
+          <Button
+            p={"4" } w={"full"} h={"40px"} color={"#000000"}  backgroundColor={"#FFFFFF"}  justifyContent="flex-start"
+            onClick={() => navigate('/places-admin')}
+          >
             <MdOutlinePlace /> Places
           </Button>
           <Button p={"4"} w={"full"} h={"40px"} color={"#000000"} backgroundColor={"#FFFFFF"} justifyContent={"flex-start"}>
