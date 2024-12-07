@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { HStack, VStack, Box, Text, Button } from '@chakra-ui/react';
 import Logo from '../../assets/logo.svg';
 import { Image } from '@chakra-ui/react';
@@ -48,10 +48,12 @@ const DashboardAdmin = () => {
               Admin
             </Text>
           </Box>
-          <Button p={"4"} w={"full"} h={"40px"} color={"#000000"} backgroundColor={"#C66E4E"} justifyContent={"flex-start"}>
+          <Button p={"4"} w={"full"} h={"40px"} color={"#000000"} backgroundColor={"#C66E4E"} justifyContent={"flex-start"}
+          onClick={() => Navigate('/')}>
             <FaHome /> Dashboard
           </Button>
-          <Button p={"4"} w={"full"} h={"40px"} color={"#000000"} backgroundColor={"#FFFFFF"} justifyContent={"flex-start"}>
+          <Button p={"4"} w={"full"} h={"40px"} color={"#000000"} backgroundColor={"#FFFFFF"} justifyContent={"flex-start"}
+          onClick={() => navigate ('/user-admin')}>
             <FaUser /> Users
           </Button>
           <Button p={"4"} w={"full"} h={"40px"} color={"#000000"} backgroundColor={"#FFFFFF"} justifyContent={"flex-start"}>

@@ -11,6 +11,12 @@ import ReviewGambar from "../pages/Daftar Tempat/ReviewGambar";
 import KontakKami from "../pages/KontakKami";
 import Profile from "../pages/Profile/Profile";
 import EditProfile from "../pages/EditProfile/EditProfile";
+import UserAdmin from "../pages/Admin/UserAdmin";
+import UserDetail from "../pages/Admin/UserDetail";
+import EditUser from "../pages/Admin/EditUser";
+import UserTambah from "../pages/Admin/UserTambah.jsx";
+import ReviewAdmin from "../pages/Admin/ReviewAdmin";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -41,7 +47,7 @@ const router = createBrowserRouter([
         element: <ReviewGambar />,
       },
       {
-        path: "/profile", // Tambahkan path untuk halaman profil
+        path: "/profile",
         element: <Profile />,
       },
       {
@@ -61,6 +67,26 @@ const router = createBrowserRouter([
   {
     path: "/register",
     element: <RegisterPage />,
+  },
+  {
+    path: "/users",
+    element: <UserAdmin />,
+  },
+  {
+    path: "/user-detail",
+    element: <UserDetail />,
+  },
+  {
+    path: "/edit-user",
+    element: <EditUser />,
+  },
+  {
+    path: "/user-tambah",
+    element: <UserTambah />,
+  },
+  {
+    path: "/review-admin",
+    element: <ReviewAdmin />,
   },
 ]);
 
