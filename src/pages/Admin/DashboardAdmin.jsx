@@ -1,30 +1,45 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { HStack, VStack, Box, Text, Button } from '@chakra-ui/react';
+import { HStack, VStack, Box, Text, Button, Flex } from '@chakra-ui/react';
 import Logo from '../../assets/logo.svg';
 import { Image } from '@chakra-ui/react';
 import { MdLogout, MdOutlinePlace } from 'react-icons/md';
 import { FaHome, FaUser } from "react-icons/fa";
 import { IoIosChatbubbles } from 'react-icons/io';
+import { RiAdminFill } from "react-icons/ri";
 
 const DashboardAdmin = () => {
   const navigate = useNavigate();
+
+  // Fungsi untuk menavigasi ke halaman Profil Admin
+  const handleProfileClick = () => {
+    navigate('/profil-admin');  // Mengarahkan ke halaman Profil Admin
+  };
+
   return (
-    <Box bg="#E8E8E8" minHeight="100vh"> {/* White background for entire page */}
+    <Box bg="#E8E8E8" minHeight="100vh">
       {/* Header */}
       <Box
         bg={"#FFFFFF"}
         w={"full"}
-        h={"100"}
+        h={"100px"}
         px={"8"}
         display={"flex"}
         alignItems={"center"}
+        justifyContent={"space-between"} // Ensures the logo is on the left and icons are on the right
       >
         <Image src={Logo} />
+        
+        {/* Icon Container */}
+        <Flex align="center" justify="flex-end" gap={4}>
+          {/* Admin Icon with onClick to navigate to Profile */}
+          <RiAdminFill size={30} onClick={handleProfileClick} cursor="pointer" />
+        </Flex>
       </Box>
 
       {/* Main Content */}
       <HStack h={"89vh"} display={"flex"} alignItems={"flex-start"} w={"full"} position={"relative"} top={"1vh"}>
+        
         {/* Sidebar */}
         <VStack
           bg={"#FFFFFF"}
@@ -32,13 +47,17 @@ const DashboardAdmin = () => {
           p={"10"}
           borderRadius={"0 0 10px 0"} 
           h={"full"}
+          position={"fixed"} // Ensures the sidebar is fixed
         >
+          {/* Gambar Profil yang Dapat Diklik */}
           <Image 
             src="https://i.pinimg.com/564x/86/b0/5b/86b05b5f1bdca7da73f0d89651ccb186.jpg" 
             borderRadius={"full"} 
             w="120px" 
             h="120px" 
             marginY={"3"}
+            cursor="pointer" // Menambahkan cursor pointer untuk menunjukkan bahwa gambar dapat diklik
+            onClick={handleProfileClick} // Menambahkan handler onClick
           />
           <Box w={"100%"} marginTop={"2"}>
             <Text color={"#000000"} fontWeight={"normal"} textAlign={"center"}>
@@ -76,7 +95,7 @@ const DashboardAdmin = () => {
           h={"full"}
           borderRadius={"10px"}
           p={"16"}
-          ml={"8"}
+          ml={"260px"} // Adjusted to leave space for the sidebar
           spacing={4}
           gap={"10"}
         >

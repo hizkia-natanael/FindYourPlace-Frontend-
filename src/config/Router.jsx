@@ -12,6 +12,8 @@ import KontakKami from "../pages/KontakKami";
 import Profile from "../pages/Profile/Profile";
 import EditProfile from "../pages/EditProfile/EditProfile";
 import PlacesAdmin from "../pages/Admin/PlacesAdmin";
+import ProfilAdmin from "../pages/ProfilAdmin/ProfilAdmin";
+import EditProfilAdmin from "../pages/EditProfileAdmin/Edit Profile Admin";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -49,6 +51,7 @@ const router = createBrowserRouter([
         path: "/edit-profile", 
         element: <EditProfile />,
       },
+     
     ],
   },
   {
@@ -67,7 +70,14 @@ const router = createBrowserRouter([
     path: "/places-admin",
     element: <PlacesAdmin />,
   },
-  
+  {
+    path: "/profil-Admin", 
+    element: <ProfilAdmin />,
+  },
+  {
+    path: "/edit-profile-admin", 
+    element: <EditProfilAdmin />,
+  },
 ]);
 
 export default router;
