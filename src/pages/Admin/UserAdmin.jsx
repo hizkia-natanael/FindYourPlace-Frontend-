@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { MdLogout, MdOutlinePlace } from "react-icons/md";
 import { FaHome, FaUser, FaEye, FaEdit, FaTrash, FaSearch } from "react-icons/fa";
@@ -7,21 +8,32 @@ import Logo from "../../assets/logo.svg";
 
 const UserAdmin = () => {
   const navigate = useNavigate();
-
-  // State untuk users
-  const [users, setUsers] = useState([
-    { id: 1, name: "Sarah Amelia", email: "sarah@gmail.com" },
-    { id: 2, name: "Budi Nugraha", email: "budi@gmail.com" },
-    { id: 3, name: "Dimas Pratama", email: "dimas@gmail.com" },
-    { id: 4, name: "Laura Putri", email: "laura@gmail.com" },
-    { id: 5, name: "Rizky Akbar", email: "rizky@gmail.com" },
-    { id: 6, name: "Anita Kartika", email: "anita@gmail.com" },
-    { id: 7, name: "Citra Maharani", email: "citra@gmail.com" },
-    { id: 8, name: "Andre Bintang", email: "andre@gmail.com" },
-  ]);
-
+  const [users, setUsers] = useState([]);
   const [searchQuery, setSearchQuery] = useState(""); // State untuk pencarian
-  const [newUserId, setNewUserId] = useState(users.length + 1); // ID unik untuk user baru
+
+  // Fetch data pengguna dari API
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        console.log(localStorage.getItem('token'));
+        if (!token) throw new Error("Token tidak ditemukan");
+  
+        const response = await axios.get("http://localhost:3000/api/auth/users", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setUsers(response.data); 
+      } catch (error) {
+        console.error("Gagal mengambil data pengguna:", error.response?.data?.message || error.message);
+      }
+    };
+  
+    fetchUsers();
+  }, []);
+  
+  
 
   // Fungsi untuk navigasi ke halaman detail user
   const handleViewUser = (user) => {
@@ -29,9 +41,20 @@ const UserAdmin = () => {
   };
 
   // Fungsi untuk menghapus user
-  const handleDeleteUser = (userId) => {
-    // Hapus user berdasarkan ID
-    setUsers(users.filter((user) => user.id !== userId));
+  const handleDeleteUser = async (userId) => {
+    try {
+      const token = localStorage.getItem("token");
+      await axios.delete(`http://localhost:3000/api/auth/users/${userId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      // Hapus user dari state lokal setelah berhasil dihapus di backend
+      setUsers(users.filter((user) => user._id !== userId));
+    } catch (error) {
+      console.error("Gagal menghapus pengguna:", error.response?.data?.message || error.message);
+      // Optional: Tambahkan logika untuk menangani error (misalnya, tampilkan pesan ke pengguna)
+    }
   };
 
   // Fungsi untuk menambah user baru
@@ -47,8 +70,8 @@ const UserAdmin = () => {
   // Filter users berdasarkan pencarian
   const filteredUsers = users.filter(
     (user) =>
-      user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      user.email.toLowerCase().includes(searchQuery.toLowerCase())
+      (user.name && user.name.toLowerCase().includes(searchQuery.toLowerCase())) ||
+      (user.email && user.email.toLowerCase().includes(searchQuery.toLowerCase()))
   );
 
   return (
@@ -136,13 +159,13 @@ const UserAdmin = () => {
             </thead>
             <tbody>
               {filteredUsers.map((user, index) => (
-                <tr key={user.id} className="border-b">
+                <tr key={user._id} className="border-b">
                   <td className="p-2">{index + 1}</td>
                   <td
                     className="p-2 text-blue-500 cursor-pointer"
                     onClick={() => handleViewUser(user)}
                   >
-                    {user.name}
+                    {user.username}
                   </td>
                   <td className="p-2">{user.email}</td>
                   <td className="p-2">
@@ -162,7 +185,7 @@ const UserAdmin = () => {
 
                       <button
                         className="p-1 text-black hover:bg-gray-100 rounded"
-                        onClick={() => handleDeleteUser(user.id)}
+                        onClick={() => handleDeleteUser(user._id)}
                       >
                         <FaTrash />
                       </button>

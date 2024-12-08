@@ -14,7 +14,7 @@ const UserDetail = () => {
     id: "N/A",
     name: "Unknown User",
     email: "unknown@example.com",
-    profilePic: "https://via.placeholder.com/100", // Placeholder image
+    profilePic: "https://via.placeholder.com/100", 
   };
 
   const handleUpdateUser = location.state?.handleUpdateUser;
@@ -87,20 +87,11 @@ const UserDetail = () => {
 
             {/* Detail User */}
             <div className="w-[80%]">
-              <div className="flex flex-col space-y-2">
-                <label className="font-bold">Nomor:</label>
-                <input
-                  type="text"
-                  value={user.id}
-                  readOnly
-                  className="w-full border rounded px-3 py-2"
-                />
-              </div>
               <div className="flex flex-col space-y-2 mt-4">
                 <label className="font-bold">Nama User:</label>
                 <input
                   type="text"
-                  value={user.name}
+                  value={user.username}
                   readOnly
                   className="w-full border rounded px-3 py-2"
                 />
