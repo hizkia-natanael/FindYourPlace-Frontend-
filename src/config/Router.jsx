@@ -14,6 +14,8 @@ import EditProfile from "../pages/EditProfile/EditProfile";
 import PlacesAdmin from "../pages/Admin/PlacesAdmin";
 import ProfilAdmin from "../pages/ProfilAdmin/ProfilAdmin";
 import EditProfilAdmin from "../pages/EditProfileAdmin/Edit Profile Admin";
+import UpdatePlace from "../pages/Admin/updateplace";
+import DeletePlace from "../pages/Admin/deleteplace";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -77,6 +79,14 @@ const router = createBrowserRouter([
   {
     path: "/edit-profile-admin", 
     element: <EditProfilAdmin />,
+  },
+  {
+    path: "/update-places", 
+    element: <UpdatePlace />,
+  },
+  {
+    path: "/delete-places", 
+    element: <DeletePlace />,
   },
 ]);
 
