@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Profile from "./Profile";
-import Login from "./Login"; // pastikan ada komponen Login
+import Login from "./pages/Login/LoginPage"; 
 
 function App() {
   return (
