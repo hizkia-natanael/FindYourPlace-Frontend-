@@ -12,6 +12,7 @@ import {
 import usePlaceStore from "../../config/placeStore";
 import Logo from "../../assets/logo.svg";
 import { Sidebar } from "../../components/organisms";
+import { Button, Input } from "../../components/atoms";
 
 const AllPlace = () => {
   const navigate = useNavigate();
@@ -46,6 +47,12 @@ const AllPlace = () => {
         <div className="bg-white flex-1 h-full rounded-lg p-16 ml-8 flex flex-col space-y-4 items-start">
           {/* Header Controls */}
           <div className="flex justify-between w-full mb-4 rounded-lg">
+            <Button
+              onClick={() => navigate("/add-place")}
+              className="bg-coklate"
+            >
+              Add Place
+            </Button>
             <div className="flex space-x-2 rounded-lg">
               <select
                 className="w-[150px] border rounded-lg px-2 py-1"
@@ -67,10 +74,16 @@ const AllPlace = () => {
           {/* Search Bar */}
           <div className="relative w-full mb-4">
             <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-300" />
-            <input
+            {/* <input
               type="text"
               placeholder="Cari Place"
               className="w-full pl-10 pr-3 py-2 border rounded"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            /> */}
+            <Input
+              className="bg-white w-full pl-10 pr-3 py-2 border rounded"
+              placeholder="Cari Place"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
