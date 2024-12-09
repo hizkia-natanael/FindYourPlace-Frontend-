@@ -49,10 +49,11 @@ const DaftarTempat = ({ _id }) => {
           {filteredPlaces.map((place, index) => (
             <Link to={`/review-gambar/${place._id}`}>
               <Card
+                key={index}
                 name={place.name}
                 image={`http://localhost:3000/uploads/${place.image}`}
                 alt={place.name}
-                key={index}
+                address={place.address}
               />
             </Link>
           ))}
