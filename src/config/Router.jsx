@@ -94,7 +94,7 @@ const router = createBrowserRouter([
     element: <AllPlace />,
   },
   {
-    path: "/edit-place/:id",
+    path: "/add-place",
     element: <PlacesAdmin />,
   },
   {
