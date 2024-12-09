@@ -98,7 +98,7 @@ const router = createBrowserRouter([
     element: <PlacesAdmin />,
   },
   {
-    path: "/users",
+    path: "/user-admin",
     element: <UserAdmin />,
   },
   {

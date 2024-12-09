@@ -28,25 +28,6 @@ const TambahReview = () => {
   });
 
   useEffect(() => {
-    // Using dummy data to simulate fetching existing reviews to determine the highest "nomor"
-    const existingReviews = [
-      {
-        nomor: 1,
-        name: "Sarah Amelia",
-        place: "Kupiku Coffee",
-        review: "Tempatnya sangat nyaman dan estetik.",
-        rating: "Bagus sekali",
-        createdAt: "2024-11-10",
-      },
-      {
-        nomor: 2,
-        name: "	Budi Nugraha",
-        place: "Blanco Coffee",
-        review: "Pelayanan ramah dan kopi enak!",
-        rating: "Bagus",
-        createdAt: "2024-11-15",
-      },
-    ];
 
     const highestNomor = existingReviews.reduce(
       (max, review) => Math.max(max, review.nomor),

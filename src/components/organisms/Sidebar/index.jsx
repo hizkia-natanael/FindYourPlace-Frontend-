@@ -13,7 +13,7 @@ const Sidebar = () => {
       w={"252px"}
       p={"10"}
       borderRadius={"0 0 10px 0"}
-      h={"full"}
+      minHeight={"100vh"}
     >
       <Image
         src="https://i.pinimg.com/564x/86/b0/5b/86b05b5f1bdca7da73f0d89651ccb186.jpg"
@@ -37,7 +37,7 @@ const Sidebar = () => {
         color={"#000000"}
         backgroundColor={"#C66E4E"}
         justifyContent={"flex-start"}
-        onClick={() => Navigate("/admin")}
+        onClick={() => navigate("/admin")}
       >
         <FaHome /> Dashboard
       </Button>
@@ -48,7 +48,7 @@ const Sidebar = () => {
         color={"#000000"}
         backgroundColor={"#FFFFFF"}
         justifyContent={"flex-start"}
-        onClick={() => navigate("/users")}
+        onClick={() => navigate("/user-admin")}
       >
         <FaUser /> Users
       </Button>
