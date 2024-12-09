@@ -1,103 +1,154 @@
 import React from "react";
-import { Navigate, useNavigate } from "react-router-dom";
-import { HStack, VStack, Box, Text, Button } from "@chakra-ui/react";
-import Logo from "../../assets/logo.svg";
-import { Image } from "@chakra-ui/react";
-import { MdLogout, MdOutlinePlace } from "react-icons/md";
-import { FaHome, FaUser } from "react-icons/fa";
-import { IoIosChatbubbles } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
+import { 
+  Box, 
+  VStack, 
+  HStack, 
+  Image, 
+  Text, 
+  Flex, 
+  Spacer, 
+  Container,
+  SimpleGrid
+} from "@chakra-ui/react";
 import { Sidebar } from "../../components/organisms";
-import "../Admin/admin.css";
+import { AdminHeader } from "../../components/organisms/Header/HeaderAdmin";
+
 const DashboardAdmin = () => {
   const navigate = useNavigate();
+
   return (
-    <Box bg="#E8E8E8" minHeight="100vh">
-      {" "}
-      {/* White background for entire page */}
+    <Flex 
+      direction="column" 
+      minHeight="100vh" 
+      bg="#E8E8E8"
+    >
       {/* Header */}
-      <Box
-        bg={"#FFFFFF"}
-        w={"full"}
-        h={"100"}
-        px={"8"}
-        display={"flex"}
-        alignItems={"center"}
-      >
-        <Image src={Logo} />
-      </Box>
-      {/* Main Content */}
-      <HStack
-        h={"89vh"}
-        display={"flex"}
-        alignItems={"flex-start"}
-        w={"full"}
-        position={"relative"}
-        top={"1vh"}
+      <AdminHeader />
+
+      {/* Main Content Area */}
+      <Flex 
+        flex={1} 
+        mt={4} 
+        mx={4}
       >
         {/* Sidebar */}
-        <Sidebar />
-
-        {/* Main Panel */}
-        <VStack
-          bg={"#FFFFFF"}
-          flex={1}
-          h={"full"}
-          borderRadius={"10px"}
-          p={"16"}
-          ml={"8"}
-          spacing={4}
-          gap={"10"}
+        <Box 
+          width="250px" 
+          mr={4}
         >
-          {/* Card 1 */}
-          <Box
-            bg={"#EBEBEB"}
-            borderRadius={"10px"}
-            p={6}
-            boxShadow={"md"}
-            w={"100%"}
-          >
-            <Text fontSize={"lg"} color={"black"} fontWeight={"bold"}>
-              Total Users:
-            </Text>
-            <Text fontSize={"sm"} color={"#373434"}>
-              Total users yang terdaftar
-            </Text>
-          </Box>
+          <Sidebar />
+        </Box>
 
-          {/* Card 2 */}
-          <Box
-            bg={"#EBEBEB"}
-            borderRadius={"10px"}
-            p={6}
-            boxShadow={"md"}
-            w={"100%"}
+        {/* Main Dashboard Content */}
+        <VStack 
+          spacing={5} 
+          align="stretch"
+        >
+          {/* Dashboard Cards */}
+          <SimpleGrid 
+            columns={{ base: 1, md: 3 }} 
+            spacing={4}
+            gap={6}
           >
-            <Text fontSize={"lg"} color={"black"} fontWeight={"bold"}>
-              Total Places:
-            </Text>
-            <Text fontSize={"sm"} color={"#373434"}>
-              Total Tempat yang telah dimasukan Admin.
-            </Text>
-          </Box>
+            {/* Total Users Card */}
+            <Box
+              bg="white"
+              borderRadius="lg"
+              p={4}
+              boxShadow="md"
+            >
+              <Text 
+                fontSize="xl" 
+                fontWeight="bold" 
+                mb={2}
+                color={"black"}
+              >
+                Total Users
+              </Text>
+              <Text 
+                color="gray.600"
+                fontSize="md"
+              >
+                Total users yang terdaftar
+              </Text>
+              <Text 
+                mt={4} 
+                fontSize="2xl" 
+                fontWeight="bold" 
+                color="blue.500"
+              >
+                0
+              </Text>
+            </Box>
 
-          {/* Card 3 */}
-          <Box
-            bg={"#EBEBEB"}
-            borderRadius={"10px"}
-            p={6}
-            boxShadow={"md"}
-            w={"100%"}
-          >
-            <Text fontSize={"lg"} color={"black"} fontWeight={"bold"}>
-              Total Reviews:
-            </Text>
-            <Text fontSize={"sm"} color={"#373434"}>
-              Total review yang telah diulas user.
-            </Text>
-          </Box>
+            {/* Total Places Card */}
+            <Box
+              bg="white"
+              borderRadius="lg"
+              p={4}
+              boxShadow="md"
+            >
+              <Text 
+                fontSize="xl" 
+                fontWeight="bold" 
+                mb={2}
+                color={"black"}
+              >
+                Total Places
+              </Text>
+              <Text 
+                color="gray.600"
+                fontSize="md"
+              >
+                Total Tempat yang telah dimasukan Admin
+              </Text>
+              <Text 
+                mt={4} 
+                fontSize="2xl" 
+                fontWeight="bold" 
+                color="green.500"
+              >
+                0
+              </Text>
+            </Box>
+
+            {/* Total Reviews Card */}
+            <Box
+              bg="white"
+              borderRadius="lg"
+              p={4}
+              boxShadow="md"
+            >
+              <Text 
+                fontSize="xl" 
+                fontWeight="bold" 
+                mb={2}
+                color={"black"}
+              >
+                Total Reviews
+              </Text>
+              <Text 
+                color="gray.600"
+                fontSize="md"
+              >
+                Total review yang telah diulas user
+              </Text>
+              <Text 
+                mt={4} 
+                fontSize="2xl" 
+                fontWeight="bold" 
+                color="purple.500"
+              >
+                0
+              </Text>
+            </Box>
+          </SimpleGrid>
+
+          {/* Additional Dashboard Sections can be added here */}
         </VStack>
-      </HStack>
-    </Box>
+      </Flex>
+    </Flex>
   );
 };
 

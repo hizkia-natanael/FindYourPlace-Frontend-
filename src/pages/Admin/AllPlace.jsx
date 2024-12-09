@@ -1,17 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { MdLogout, MdOutlinePlace } from "react-icons/md";
 import {
-  FaHome,
-  FaUser,
   FaEye,
   FaEdit,
   FaTrash,
   FaSearch,
 } from "react-icons/fa";
 import usePlaceStore from "../../config/placeStore";
-import Logo from "../../assets/logo.svg";
 import { Sidebar } from "../../components/organisms";
+import { AdminHeader } from "../../components/organisms/Header/HeaderAdmin";
 
 const AllPlace = () => {
   const navigate = useNavigate();
@@ -34,33 +31,31 @@ const AllPlace = () => {
   return (
     <div className="bg-[#E8E8E8] min-h-screen h-full">
       {/* Header */}
-      <div className="bg-white w-full h-[100px] px-8 flex items-center">
-        <img src={Logo} alt="Logo" />
-      </div>
+      <AdminHeader  />
 
       {/* Main Content */}
-      <div className="flex h-[89vh] items-start w-full relative top-[1vh]">
+      <div className="flex min-h-[100vh] items-start w-full">
         {/* Sidebar */}
         <Sidebar />
         {/* Main Panel */}
-        <div className="bg-white flex-1 h-full rounded-lg p-16 ml-8 flex flex-col space-y-4 items-start">
+        <div className="bg-white flex-1 min-h-[100vh] rounded-lg p-16 ml-8 flex flex-col space-y-4 items-start">
           {/* Header Controls */}
           <div className="flex justify-between w-full mb-4 rounded-lg">
             <div className="flex space-x-2 rounded-lg">
               <select
-                className="w-[150px] border rounded-lg px-2 py-1"
+                className="w-[170px] border rounded-lg px-2 py-1 bg-white text-black"
                 onChange={(e) => handleSort(e.target.value)}
               >
-                <option value="latest">Sort By: Terbaru</option>
-                <option value="oldest">Sort By: Terlama</option>
+                <option className="bg-gray-200 text-black" value="latest">Sort By: Terbaru</option>
+                <option className="bg-gray-200 text-black" value="oldest">Sort By: Terlama</option>
               </select>
               <select
-                className="w-[110px] border rounded-lg px-2 py-1"
+                className="w-[110px] border rounded-lg px-2 py-1 bg-white text-black"
                 onChange={(e) => handleShow(e.target.value)}
               >
-                <option value="10">Show: 10</option>
-                <option value="20">Show: 20</option>
-                <option value="30">Show: 30</option>
+                <option className="bg-gray-200 text-black" value="10">Show: 10</option>
+                <option className="bg-gray-200 text-black" value="20">Show: 20</option>
+                <option className="bg-gray-200 text-black" value="30">Show: 30</option>
               </select>
             </div>
           </div>
