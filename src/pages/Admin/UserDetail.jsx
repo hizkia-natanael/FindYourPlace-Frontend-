@@ -4,6 +4,7 @@ import { MdLogout, MdOutlinePlace } from "react-icons/md";
 import { FaHome, FaUser } from "react-icons/fa";
 import { IoIosChatbubbles } from "react-icons/io";
 import Logo from "../../assets/logo.svg";
+import { Sidebar } from "../../components/organisms";
 
 const UserDetail = () => {
   const navigate = useNavigate();
@@ -33,43 +34,7 @@ const UserDetail = () => {
       {/* Main Content */}
       <div className="flex h-[80vh] items-start w-full relative top-[1vh]">
         {/* Sidebar */}
-        <div className="bg-white w-[252px] p-10 rounded-br-lg h-full flex flex-col items-center">
-          <img
-            src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGVvcGxlfGVufDB8fDB8fHww"
-            alt="Profile"
-            className="rounded-full w-[120px] h-[120px] my-3"
-          />
-          <div className="w-full mt-2">
-            <p className="text-black text-center">
-              Welcome, <span className="font-bold">{user.name}</span>!
-            </p>
-            <p className="text-black font-bold text-center">{user.id}</p>
-          </div>
-          <button
-            className="p-4 w-full h-[40px] text-black flex items-center justify-start mb-2"
-            onClick={() => navigate("/admin")}
-          >
-            <FaHome className="mr-2" /> Dashboard
-          </button>
-          <button
-            className="p-4 w-full h-[40px] text-black bg-[#C66E4E] flex items-center justify-start mb-2"
-            onClick={() => navigate("/users")}
-          >
-            <FaUser className="mr-2" /> Users
-          </button>
-          <button className="p-4 w-full h-[40px] text-black bg-white flex items-center justify-start mb-2">
-            <MdOutlinePlace className="mr-2" /> Places
-          </button>
-          <button className="p-4 w-full h-[40px] text-black bg-white flex items-center justify-start mb-2">
-            <IoIosChatbubbles className="mr-2" /> Reviews
-          </button>
-          <button
-            className="w-[130px] h-[40px] bg-[#C66E4E] mt-5"
-            onClick={() => navigate("/")}
-          >
-            <MdLogout className="inline-block mr-2" /> Sign out
-          </button>
-        </div>
+        <Sidebar />
 
         {/* User Detail Panel */}
         <div className="bg-white flex-1 h-full rounded-lg p-7 ml-8">

@@ -1,9 +1,17 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { MdLogout, MdOutlinePlace } from "react-icons/md";
-import { FaHome, FaUser, FaEye, FaEdit, FaTrash, FaSearch } from "react-icons/fa";
+import {
+  FaHome,
+  FaUser,
+  FaEye,
+  FaEdit,
+  FaTrash,
+  FaSearch,
+} from "react-icons/fa";
 import { IoIosChatbubbles } from "react-icons/io";
 import Logo from "../../assets/logo.svg";
+import { Sidebar } from "../../components/organisms";
 
 const UserAdmin = () => {
   const navigate = useNavigate();
@@ -13,11 +21,23 @@ const UserAdmin = () => {
 
   // Dummy data for the Users table
   const users = [
-    { id: 1, name: "Sarah Amelia", review: "Tempatnya sangat nyaman dan estetik." },
+    {
+      id: 1,
+      name: "Sarah Amelia",
+      review: "Tempatnya sangat nyaman dan estetik.",
+    },
     { id: 2, name: "Budi Nugraha", review: "Pelayanan ramah dan kopi enak!" },
     { id: 3, name: "Dimas Pratama", review: "Suasananya cocok untuk bekerja." },
-    { id: 4, name: "Laura Putri", review: "Harganya terjangkau, tempat bersih." },
-    { id: 5, name: "Rizky Akbar", review: "Sangat recommended untuk nongkrong." },
+    {
+      id: 4,
+      name: "Laura Putri",
+      review: "Harganya terjangkau, tempat bersih.",
+    },
+    {
+      id: 5,
+      name: "Rizky Akbar",
+      review: "Sangat recommended untuk nongkrong.",
+    },
     { id: 6, name: "Anita Kartika", review: "Menu makanannya cukup variatif." },
     { id: 7, name: "Citra Maharani", review: "Musiknya asyik, bikin betah." },
     { id: 8, name: "Andre Bintang", review: "Cocok untuk kumpul keluarga." },
@@ -25,7 +45,9 @@ const UserAdmin = () => {
 
   // Filter users based on searchTerm
   const filteredUsers = users
-    .filter((user) => user.name.toLowerCase().includes(searchTerm.toLowerCase()))
+    .filter((user) =>
+      user.name.toLowerCase().includes(searchTerm.toLowerCase())
+    )
     .slice(0, showCount);
 
   const handleSort = (order) => {
@@ -64,47 +86,7 @@ const UserAdmin = () => {
       {/* Main Content */}
       <div className="flex h-[89vh] items-start w-full relative top-[1vh]">
         {/* Sidebar */}
-        <div className="bg-white w-[252px] p-10 rounded-br-lg h-full flex flex-col items-center">
-          <img
-            src="https://i.pinimg.com/564x/86/b0/5b/86b05b5f1bdca7da73f0d89651ccb186.jpg"
-            alt="Profile"
-            className="rounded-full w-[120px] h-[120px] my-3"
-          />
-          <div className="w-full mt-2">
-            <p className="text-black text-center">
-              Welcome, <span className="font-bold">Natan</span>!
-            </p>
-            <p className="text-black font-bold text-center">Admin</p>
-          </div>
-          <button
-            className="p-4 w-full h-[40px] text-black flex items-center justify-start mb-2"
-            onClick={() => navigate("/")}
-          >
-            <FaHome className="mr-2" /> Dashboard
-          </button>
-          <button
-            className="p-4 w-full h-[40px] text-black flex items-center justify-start mb-2 bg-gray-200"
-          >
-            <FaUser className="mr-2" /> Users
-          </button>
-          <button
-            className="p-4 w-full h-[40px] text-black flex items-center justify-start mb-2"
-            onClick={() => navigate("/place-admin")}
-          >
-            <MdOutlinePlace className="mr-2" /> Places
-          </button>
-          <button
-            className="p-4 w-full h-[40px] text-black bg-[#C66E4E] flex items-center justify-start mb-2"
-          >
-            <IoIosChatbubbles className="mr-2" /> Reviews
-          </button>
-          <button
-            className="w-[130px] h-[40px] bg-[#C66E4E] mt-5"
-            onClick={() => navigate("/login")}
-          >
-            <MdLogout className="inline-block mr-2" /> Sign out
-          </button>
-        </div>
+        <Sidebar />
         {/* Main Panel */}
         <div className="bg-white flex-1 h-full rounded-lg p-16 ml-8 flex flex-col space-y-4 items-start">
           {/* Header Controls */}

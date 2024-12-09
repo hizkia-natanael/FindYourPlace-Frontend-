@@ -1,26 +1,32 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { MdLogout, MdOutlinePlace } from 'react-icons/md';
-import { FaHome, FaUser, FaSave } from 'react-icons/fa';
-import { IoIosChatbubbles } from 'react-icons/io';
-import Logo from '../../assets/logo.svg';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { MdLogout, MdOutlinePlace } from "react-icons/md";
+import { FaHome, FaUser, FaSave } from "react-icons/fa";
+import { IoIosChatbubbles } from "react-icons/io";
+import Logo from "../../assets/logo.svg";
+import { Sidebar } from "../../components/organisms";
 
 const EditReview = () => {
   const navigate = useNavigate();
   const [editableReview, setEditableReview] = useState(null);
 
-  const places = ['Kupiku Coffee', 'Blanco Coffee', 'Oppio Coffee']; // Dummy data for places
-  const users = ['Sarah Amelia', 'Budi Nugraha', 'Dimas Pratama', 'Laura Putri']; // Dummy data for users
+  const places = ["Kupiku Coffee", "Blanco Coffee", "Oppio Coffee"]; // Dummy data for places
+  const users = [
+    "Sarah Amelia",
+    "Budi Nugraha",
+    "Dimas Pratama",
+    "Laura Putri",
+  ]; // Dummy data for users
 
   useEffect(() => {
     // Using dummy data for review
     const dummyReview = {
       nomor: 1,
-      name: 'Sarah Amelia',
-      place: 'Kupiku Coffee',
-      review: 'Tempatnya sangat nyaman dan estetik.',
-      rating: 'Bagus sekali',
-      createdAt: '2024-12-07',
+      name: "Sarah Amelia",
+      place: "Kupiku Coffee",
+      review: "Tempatnya sangat nyaman dan estetik.",
+      rating: "Bagus sekali",
+      createdAt: "2024-12-07",
     };
     setEditableReview(dummyReview);
   }, []);
@@ -38,8 +44,8 @@ const EditReview = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Implement the save logic here
-    console.log('Review saved:', editableReview);
-    navigate('/review-admin'); // Navigate back to reviews page after saving
+    console.log("Review saved:", editableReview);
+    navigate("/review-admin"); // Navigate back to reviews page after saving
   };
 
   return (
@@ -52,47 +58,7 @@ const EditReview = () => {
       {/* Main Content */}
       <div className="flex items-start w-full relative top-[1vh]">
         {/* Sidebar */}
-        <div className="bg-white w-[252px] p-10 rounded-br-lg h-[90vh] flex flex-col items-center">
-          <img
-            src="https://i.pinimg.com/564x/86/b0/5b/86b05b5f1bdca7da73f0d89651ccb186.jpg"
-            alt="Profile"
-            className="rounded-full w-[120px] h-[120px] my-3"
-          />
-          <div className="w-full mt-2">
-            <p className="text-black text-center">
-              Welcome, <span className="font-bold">Natan</span>!
-            </p>
-            <p className="text-black font-bold text-center">Admin</p>
-          </div>
-          <button
-            className="p-4 w-full h-[40px] text-black flex items-center justify-start mb-2"
-            onClick={() => navigate('/')}
-          >
-            <FaHome className="mr-2" /> Dashboard
-          </button>
-          <button
-            className="p-4 w-full h-[40px] text-black flex items-center justify-start mb-2"
-            onClick={() => navigate('/user-admin')}
-          >
-            <FaUser className="mr-2" /> Users
-          </button>
-          <button className="p-4 w-full h-[40px] text-black bg-white flex items-center justify-start mb-2"
-          onClick={() => navigate('/place-admin')}
-          >
-            <MdOutlinePlace className="mr-2" /> Places
-          </button>
-          <button className="p-4 w-full h-[40px] text-black bg-[#C66E4E] flex items-center justify-start mb-2"
-          onClick={() => navigate('/review-admin')}
-          >
-            <IoIosChatbubbles className="mr-2" /> Reviews
-          </button>
-          <button 
-            className="w-[130px] h-[40px] bg-[#C66E4E] mt-5"
-            onClick={() => navigate('/login')}
-          >
-            <MdLogout className="inline-block mr-2" /> Sign out
-          </button>
-        </div>
+        <Sidebar />
 
         {/* Main Panel */}
         <div className="bg-white flex-1 rounded-lg p-7 ml-8">
@@ -100,7 +66,9 @@ const EditReview = () => {
           {editableReview ? (
             <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
               <div className="flex items-center">
-                <label className="font-bold text-gray-600 w-[150px]">Nomor:</label>
+                <label className="font-bold text-gray-600 w-[150px]">
+                  Nomor:
+                </label>
                 <input
                   type="text"
                   name="nomor"
@@ -111,7 +79,9 @@ const EditReview = () => {
                 />
               </div>
               <div className="flex items-center">
-                <label className="font-bold text-gray-600 w-[150px]">Nama User:</label>
+                <label className="font-bold text-gray-600 w-[150px]">
+                  Nama User:
+                </label>
                 <select
                   name="name"
                   value={editableReview.name}
@@ -126,7 +96,9 @@ const EditReview = () => {
                 </select>
               </div>
               <div className="flex items-center">
-                <label className="font-bold text-gray-600 w-[150px]">Nama Tempat:</label>
+                <label className="font-bold text-gray-600 w-[150px]">
+                  Nama Tempat:
+                </label>
                 <select
                   name="place"
                   value={editableReview.place}
@@ -141,7 +113,9 @@ const EditReview = () => {
                 </select>
               </div>
               <div className="flex items-center">
-                <label className="font-bold text-gray-600 w-[150px]">Isi Review:</label>
+                <label className="font-bold text-gray-600 w-[150px]">
+                  Isi Review:
+                </label>
                 <textarea
                   name="review"
                   value={editableReview.review}
@@ -150,7 +124,9 @@ const EditReview = () => {
                 />
               </div>
               <div className="flex items-center">
-                <label className="font-bold text-gray-600 w-[150px]">Rating:</label>
+                <label className="font-bold text-gray-600 w-[150px]">
+                  Rating:
+                </label>
                 <select
                   name="rating"
                   value={editableReview.rating}
@@ -165,7 +141,9 @@ const EditReview = () => {
                 </select>
               </div>
               <div className="flex items-center">
-                <label className="font-bold text-gray-600 w-[150px]">Created At:</label>
+                <label className="font-bold text-gray-600 w-[150px]">
+                  Created At:
+                </label>
                 <input
                   type="text"
                   name="createdAt"
@@ -178,12 +156,15 @@ const EditReview = () => {
 
               {/* Action Buttons */}
               <div className="flex justify-center w-full mt-4">
-                <button type="submit" className="bg-[#C66E4E] text-white px-4 py-2 rounded mr-4">
+                <button
+                  type="submit"
+                  className="bg-[#C66E4E] text-white px-4 py-2 rounded mr-4"
+                >
                   <FaSave className="inline-block mr-2" /> Simpan Perubahan
                 </button>
                 <button
-                onClick={() => navigate(-1)} // Navigate ke halaman sebelumnya
-                className="bg-gray-300 text-black px-4 py-2 rounded"
+                  onClick={() => navigate(-1)} // Navigate ke halaman sebelumnya
+                  className="bg-gray-300 text-black px-4 py-2 rounded"
                 >
                   Kembali
                 </button>
