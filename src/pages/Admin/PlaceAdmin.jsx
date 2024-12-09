@@ -11,41 +11,35 @@ import {
   Image,
 } from "@chakra-ui/react";
 import Logo from "../../assets/logo.svg";
-import { MdLogout, MdOutlinePlace } from "react-icons/md";
-import { FaHome, FaUser } from "react-icons/fa";
-import { IoIosChatbubbles } from "react-icons/io";
 import usePlaceStore from "../../config/placeStore";
 import usePlaceFormStore from "../../config/placeFormStore";
 import { Upload } from "../../components/atoms";
 import { Sidebar } from "../../components/organisms";
+
 const PlacesAdmin = () => {
   const { form, imgPreview, setFormData, setImgPreview, resetFormData } =
     usePlaceFormStore();
-  const { getPlaceById, getPlace, addPlace, updatePlace } = usePlaceStore();
+  const { getPlaceById, addPlace, updatePlace } = usePlaceStore();
   const { name, description, googleMapsLink, address } = form;
-  const { isUpdate, setIsUpdate } = useState(false);
+  const [isUpdate, setIsUpdate] = useState(false);
   const navigate = useNavigate();
   const { id } = useParams();
-  // const [placeName, setPlaceName] = useState("");
-  // const [placeDescription, setPlaceDescription] = useState("");
-  // const [placeLocation, setPlaceLocation] = useState("");
-  // const [placeFasilitas, setPlaceFasilitas] = useState("");
-  // const [placeHours, setPlaceHours] = useState("");
-  // const [placePhoneNumber, setPlacePhoneNumber] = useState("");
-  // const [placeImage, setPlaceImage] = useState(null);
 
   useEffect(() => {
     if (id) {
-      setIsUpdate(true);
-      const place = getPlaceById(id);
-      setFormData("name", place.name);
-      setFormData("description", place.description);
-      setFormData("googleMapsLink", place.googleMapsLink);
-      setFormData("address", place.address);
-      setFormData("image", place.image);
-      setImgPreview(place.image);
+      const fetchData = async () => {
+        setIsUpdate(true);
+        const place = await getPlaceById(id);
+        setFormData("name", place.name);
+        setFormData("description", place.description);
+        setFormData("googleMapsLink", place.googleMapsLink);
+        setFormData("address", place.address);
+        setFormData("image", place.image);
+        setImgPreview(place.image);
+      };
+      fetchData();
     } else {
-      resetFormData;
+      resetFormData();
     }
   }, [id, getPlaceById, setFormData, setImgPreview, resetFormData]);
 
@@ -55,7 +49,6 @@ const PlacesAdmin = () => {
     setFormData("image", file);
   };
 
-  // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
     if (isUpdate) {
@@ -67,7 +60,7 @@ const PlacesAdmin = () => {
   };
 
   return (
-    <Box bg="#E8E8E8" minHeight="100vh" color={"black"}>
+    <Box bg="#ffffff" minHeight="100vh" color={"black"}>
       {/* Header */}
       <Box
         bg={"#FFFFFF"}
@@ -103,7 +96,7 @@ const PlacesAdmin = () => {
           spacing={4}
           gap={"10"}
         >
-          {/* Form to Add a Place */}
+          {/* Form to Add/Edit a Place */}
           <Box
             bg={"#FFFFFF"} // Background diubah menjadi putih
             borderRadius={"10px"}
@@ -111,14 +104,14 @@ const PlacesAdmin = () => {
             boxShadow={"md"}
             w={"100%"}
           >
-            {/* Add New Places Title */}
+            {/* Add/Edit Places Title */}
             <Text
               fontSize={"lg"}
               color={"black"}
               fontWeight={"bold"}
               textAlign="center"
             >
-              Add New Places
+              {isUpdate ? "Edit Place" : "Add New Place"}
             </Text>
 
             {/* Place Name */}
@@ -137,12 +130,14 @@ const PlacesAdmin = () => {
               mb={4}
             />
 
+            {/* Place Address */}
             <Input
-              placeholder="Place Addres"
+              placeholder="Place Address"
               value={address}
               onChange={(e) => setFormData("address", e.target.value)}
               mb={4}
             />
+
             {/* Place Location */}
             <Input
               placeholder="Place Location"
@@ -151,30 +146,6 @@ const PlacesAdmin = () => {
               mb={4}
             />
 
-            {/* Fasilitas */}
-            {/* <Input
-              placeholder="Fasilitas"
-              value={placeFasilitas}
-              onChange={(e) => setPlaceFasilitas(e.target.value)}
-              mb={4}
-            /> */}
-
-            {/* Hours */}
-            {/* <Input
-              placeholder="Operating Hours"
-              value={placeHours}
-              onChange={(e) => setPlaceHours(e.target.value)}
-              mb={4}
-            /> */}
-
-            {/* Phone Number */}
-            {/* <Input
-              placeholder="Phone Number"
-              value={placePhoneNumber}
-              onChange={(e) => setPlacePhoneNumber(e.target.value)}
-              mb={4}
-            /> */}
-
             {/* Place Image */}
             <Upload
               className="mb-4"
@@ -182,11 +153,9 @@ const PlacesAdmin = () => {
               src={imgPreview}
             />
 
-            {/* Image Preview */}
-
             {/* Submit Button */}
             <Button bg={"#C66E4E"} color={"white"} onClick={handleSubmit}>
-              Save Places
+              Save Place
             </Button>
           </Box>
         </VStack>

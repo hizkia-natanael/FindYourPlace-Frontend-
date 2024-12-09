@@ -41,28 +41,38 @@ const usePlaceStore = create((set) => ({
       console.error(error);
     }
   },
-  // updatePlace: async (id, updatedPlace) => {
-  //   try {
-  //     const formData = new FormData();
-  //     formData.append("name", updatedPlace.name);
-  //     formData.append("description", updatedPlace.description);
-  //     formData.append("googleMapsLink", updatedPlace.googleMapsLink);
-  //     formData.append("addres", updatedPlace.addres);
-  //     formData.append("image", updatedPlace.image);
+  updatePlace: async (id, updatedPlace) => {
+    try {
+      const formData = new FormData();
+      formData.append("name", updatedPlace.name);
+      formData.append("description", updatedPlace.description);
+      formData.append("googleMapsLink", updatedPlace.googleMapsLink);
+      formData.append("address", updatedPlace.address);
+      formData.append("image", updatedPlace.image);
 
-  //     const { data } = await axiosInstance.put(`/place/${id}`, formData, {
-  //       headers: {
-  //         "Content-Type": "multipart/form-data",
-  //       },
-  //     });
+      const { data } = await axiosInstance.put(`/place/${id}`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
 
-  //     set((state) => ({
-  //       places : state.places.map((place)=> place._id === id ? data)
-  //     }));
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // },
+      set((state) => ({
+        places: state.places.map((place) => (place._id === id ? data : place)),
+      }));
+    } catch (error) {
+      console.error(error);
+    }
+  },
+  deletePlace: async (id) => {
+    try {
+      await axiosInstance.delete(`/place/${id}`);
+      set((state) => ({
+        places: state.places.filter((place) => place._id !== id),
+      }));
+    } catch (error) {
+      console.error(error);
+    }
+  },
 }));
 
 export default usePlaceStore;

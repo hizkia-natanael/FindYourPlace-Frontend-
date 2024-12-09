@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ReviewGambar from "./ReviewGambar";
-import { Card } from "../../components/atoms";
+import { Card, Input } from "../../components/atoms";
 import usePlaceStore from "../../config/placeStore.js";
 import { Link } from "react-router-dom";
 const DaftarTempat = ({ _id }) => {
@@ -27,10 +27,9 @@ const DaftarTempat = ({ _id }) => {
         {/* Pencarian */}
         <div className="mb-8 pt-20">
           <div className="lg:w-[660px] sm:w-auto m-auto mb-10">
-            <input
-              type="text"
-              className="w-full border p-2 rounded-md focus:ring-2 focus:ring-[#a04925]"
-              placeholder="Cari tempat..."
+            <Input
+              className=" flex-grow w-full shadow-md text-black shadow-zinc-600 border bg-white"
+              placeholder="search tempat nongkrongmu...."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />

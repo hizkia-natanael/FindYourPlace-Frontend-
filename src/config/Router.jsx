@@ -20,6 +20,7 @@ import UserDetail from "../pages/Admin/UserDetail";
 import EditUser from "../pages/Admin/EditUser";
 import UserTambah from "../pages/Admin/UserTambah.jsx";
 import PlacesAdmin from "../pages/Admin/PlaceAdmin.jsx";
+import AllPlace from "../pages/Admin/AllPlace.jsx";
 
 const router = createBrowserRouter([
   {
@@ -90,6 +91,10 @@ const router = createBrowserRouter([
   },
   {
     path: "/admin-place",
+    element: <AllPlace />,
+  },
+  {
+    path: "/edit-place/:id",
     element: <PlacesAdmin />,
   },
   {
