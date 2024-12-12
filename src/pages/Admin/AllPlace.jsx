@@ -11,7 +11,6 @@ import { Sidebar } from "../../components/organisms";
 import { AdminHeader } from "../../components/organisms/Header/HeaderAdmin";
 import { Button, Input } from "../../components/atoms";
 
-
 const AllPlace = () => {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
