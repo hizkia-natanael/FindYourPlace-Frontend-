@@ -5,4 +5,14 @@ import Logo from "./Logo";
 import HamburgerMenu from "./HamburgerMenu";
 import Card from "./Card";
 import WhatsAppButton from "./WhatsappButton";
-export { Button, Input, Label, Logo, HamburgerMenu, Card, WhatsAppButton };
+import Upload from "./Upload";
+export {
+  Button,
+  Input,
+  Label,
+  Logo,
+  HamburgerMenu,
+  Card,
+  WhatsAppButton,
+  Upload,
+};

@@ -11,11 +11,16 @@ import ReviewGambar from "../pages/Daftar Tempat/ReviewGambar";
 import KontakKami from "../pages/KontakKami";
 import Profile from "../pages/Profile/Profile";
 import EditProfile from "../pages/EditProfile/EditProfile";
+import ReviewAdmin from "../pages/Admin/ReviewAdmin";
+import DetailReview from "../pages/Admin/DetailReview";
+import EditReview from "../pages/Admin/EditReview";
+import TambahReview from "../pages/Admin/TambahReview";
 import UserAdmin from "../pages/Admin/UserAdmin";
 import UserDetail from "../pages/Admin/UserDetail";
 import EditUser from "../pages/Admin/EditUser";
 import UserTambah from "../pages/Admin/UserTambah.jsx";
-import ReviewAdmin from "../pages/Admin/ReviewAdmin";
+import PlacesAdmin from "../pages/Admin/PlaceAdmin.jsx";
+import AllPlace from "../pages/Admin/AllPlace.jsx";
 
 const router = createBrowserRouter([
   {
@@ -69,7 +74,31 @@ const router = createBrowserRouter([
     element: <RegisterPage />,
   },
   {
-    path: "/users",
+    path: "/review-admin",
+    element: <ReviewAdmin />,
+  },
+  {
+    path: "/detail-review",
+    element: <DetailReview />,
+  },
+  {
+    path: "/edit-review",
+    element: <EditReview />,
+  },
+  {
+    path: "/tambah-review",
+    element: <TambahReview />,
+  },
+  {
+    path: "/admin-place",
+    element: <AllPlace />,
+  },
+  {
+    path: "/add-place",
+    element: <PlacesAdmin />,
+  },
+  {
+    path: "/user-admin",
     element: <UserAdmin />,
   },
   {
@@ -83,10 +112,6 @@ const router = createBrowserRouter([
   {
     path: "/user-tambah",
     element: <UserTambah />,
-  },
-  {
-    path: "/review-admin",
-    element: <ReviewAdmin />,
   },
 ]);
 

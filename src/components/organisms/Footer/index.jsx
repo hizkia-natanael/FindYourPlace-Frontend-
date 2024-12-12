@@ -1,10 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Facebook, Instagram, Twitter } from "../../../assets/Icon";
+import "../Footer/footer.css";
 const Footer = () => {
   return (
-    <footer className="bg-[#c66e4e] text-white py-8">
-      <div className="container mx-auto px-4">
+    <footer className="footer bg-[#c66e4e] text-white py-8">
+      <div className="container mx-auto px-4 bg-[#c66e4e] ">
         <div className="flex flex-col md:flex-row justify-between items-start">
           <div className="mb-6 md:mb-0">
             <h1 className="text-2xl font-bold">
