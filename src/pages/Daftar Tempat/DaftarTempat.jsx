@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import ReviewGambar from "./ReviewGambar";
 import { Card, Input } from "../../components/atoms";
 import usePlaceStore from "../../config/placeStore.js";
 import { Link } from "react-router-dom";
@@ -17,12 +16,6 @@ const DaftarTempat = ({ _id }) => {
 
   return (
     <div>
-      {/* {selectedPlace ? (
-        <ReviewGambar
-          selectedPlace={selectedPlace}
-          onBack={() => setSelectedPlace(null)}
-        />
-      ) : ( */}
       <div className="px-6 sm:px-10 lg:px-16 py-12 bg-white">
         {/* Pencarian */}
         <div className="mb-8 pt-20">

@@ -1,98 +1,140 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { MdLogout, MdOutlinePlace } from "react-icons/md";
-import {
-  FaHome,
-  FaUser,
-  FaEye,
-  FaEdit,
-  FaTrash,
-  FaSearch,
-} from "react-icons/fa";
-import { IoIosChatbubbles } from "react-icons/io";
-import Logo from "../../assets/logo.svg";
+import { getReviews, deleteReview } from "../../config/reviewStore.js";  
 import { Sidebar } from "../../components/organisms";
 import { AdminHeader } from "../../components/organisms/Header/HeaderAdmin";
 
 const UserAdmin = () => {
-  const navigate = useNavigate();
+  const [existingReviews, setExistingReviews] = useState([]); 
   const [searchTerm, setSearchTerm] = useState("");
   const [sortOrder, setSortOrder] = useState("latest");
   const [showCount, setShowCount] = useState(10);
-  const [users, setUsers] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchUsers = async () => {
-      const response = await fetch('/api/users');
-      const data = await response.json();
-      setUsers(data);
+    const fetchReviews = async () => {
+      try {
+        const reviews = await getReviews(); 
+        console.log('Original Reviews:', reviews); // Tambahkan ini untuk memeriksa struktur data
+  
+        const processedReviews = reviews.map(review => {
+          console.log('Single Review:', review); // Tambahkan ini untuk melihat setiap review
+  
+          return {
+            ...review,
+            id: review._id || review.id, // Tambahkan fallback untuk ID
+            userName: review.userId.name || review.userId.email || 'Unknown User',
+            userEmail: review.userId.email || 'Unknown Email',
+            placeName: review.placeId.name || 'Unknown Place'
+          };
+        });
+  
+        setExistingReviews(processedReviews); 
+      } catch (error) {
+        console.error('Error fetching reviews:', error.message);
+      }
     };
-    fetchUsers();
-  }, []);
+    fetchReviews();
+  }, []); 
 
-  // Filter users based on searchTerm
-  const filteredUsers = users
-    .filter((user) =>
-      user.name.toLowerCase().includes(searchTerm.toLowerCase())
+  // Filter reviews based on searchTerm
+  const filteredReviews = existingReviews
+    .filter((review) =>
+      review.comment.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      review.userEmail.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      review.placeName.toLowerCase().includes(searchTerm.toLowerCase())
     )
     .slice(0, showCount);
 
+  // Sorting function
   const handleSort = (order) => {
     setSortOrder(order);
-    if (order === "latest") {
-      users.sort((a, b) => b.id - a.id);
-    } else {
-      users.sort((a, b) => a.id - b.id);
+    const sortedReviews = [...existingReviews].sort((a, b) => {
+      return order === "latest"
+        ? new Date(b.createdAt) - new Date(a.createdAt)
+        : new Date(a.createdAt) - new Date(b.createdAt);
+    });
+    setExistingReviews(sortedReviews);
+  };
+
+  // Handle show count change
+  const handleShow = (count) => setShowCount(parseInt(count));
+
+  // Action handlers
+  const handleViewReview = (reviewId) => {
+    console.log(`Viewing review with ID: ${reviewId}`);
+  };
+
+  // Delete review handler
+  const handleDeleteReview = async (reviewId) => {
+    try {
+      setIsLoading(true);
+      // Call delete API 
+      await deleteReview(reviewId);
+      
+      // Remove the deleted review from the state
+      setExistingReviews(prevReviews => 
+        prevReviews.filter(review => review.id !== reviewId)
+      );
+      
+      setError(null);
+    } catch (error) {
+      console.error('Error deleting review:', error.message);
+      setError('Failed to delete review. Please try again.');
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  const handleShow = (count) => setShowCount(parseInt(count));
-
-  const handleView = (id) => {
-    console.log(`Viewing user with ID: ${id}`);
-    // Navigasi ke detail user
-  };
-
-  const handleEdit = (id) => {
-    console.log(`Editing user with ID: ${id}`);
-    // Navigasi ke halaman edit user
-  };
-
-  const handleDelete = (id) => {
-    console.log(`Deleting user with ID: ${id}`);
-    // Tambahkan konfirmasi penghapusan jika perlu
+  const handleAddReview = () => {
+    console.log("Navigating to Add Review");
   };
 
   return (
     <div className="bg-[#E8E8E8] min-h-screen">
-      {/* Header */}
       <AdminHeader />
-
-      {/* Main Content */}
-      <div className="flex min-h-[100vh] items-start w-full">
-        {/* Sidebar */}
+      <div className="flex min-h-[100vh]">
         <Sidebar />
-        {/* Main Panel */}
+        
         <div className="bg-white flex-1 min-h-[100vh] rounded-lg p-16 ml-8 flex flex-col space-y-4 items-start">
+          {/* Error Message */}
+          {error && (
+            <div className="w-full bg-red-100 text-red-700 p-4 rounded-lg mb-4">
+              {error}
+            </div>
+          )}
+
+          {/* Loading Overlay */}
+          {isLoading && (
+            <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+              <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-[#C66E4E]"></div>
+            </div>
+          )}
+
           {/* Header Controls */}
           <div className="flex justify-between w-full mb-4 rounded-lg">
             <button
               className="bg-[#C66E4E] text-white px-4 py-2 rounded-lg"
-              onClick={() => navigate("/tambah-review")}
+              onClick={handleAddReview}
+              disabled={isLoading}
             >
               + Tambah Review
             </button>
             <div className="flex space-x-2 rounded-lg">
               <select
                 className="w-[150px] border rounded-lg px-2 py-1"
+                value={sortOrder}
                 onChange={(e) => handleSort(e.target.value)}
+                disabled={isLoading}
               >
                 <option value="latest">Sort By: Terbaru</option>
                 <option value="oldest">Sort By: Terlama</option>
               </select>
               <select
                 className="w-[110px] border rounded-lg px-2 py-1"
+                value={showCount}
                 onChange={(e) => handleShow(e.target.value)}
+                disabled={isLoading}
               >
                 <option value="10">Show: 10</option>
                 <option value="20">Show: 20</option>
@@ -100,54 +142,47 @@ const UserAdmin = () => {
               </select>
             </div>
           </div>
+
           {/* Search Bar */}
           <div className="w-full flex justify-center mb-4">
             <div className="relative w-1/2">
-              <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-300" />
               <input
                 type="text"
                 placeholder="Cari Review"
                 className="w-full pl-10 pr-3 py-2 border rounded"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
+                disabled={isLoading}
               />
             </div>
           </div>
-          {/* Users Table */}
+
+          {/* Reviews Table */}
           <table className="w-full border-collapse">
             <thead>
               <tr className="border-b">
-                <th className="text-left p-2">No</th>
-                <th className="text-left p-2">Nama</th>
-                <th className="text-left p-2">Review</th>
-                <th className="text-left p-2">Aksi</th>
+                <th className="text-left p-2 text-black">No</th>
+                <th className="text-left p-2 text-black">Email</th>
+                <th className="text-left p-2 text-black">Tempat</th>
+                <th className="text-left p-2 text-black">Review</th>
+                <th className="text-left p-2 text-black">Aksi</th>
               </tr>
             </thead>
             <tbody>
-              {filteredUsers.map((user, index) => (
-                <tr key={user.id} className="border-b">
-                  <td className="p-2">{index + 1}</td>
-                  <td className="p-2">{user.name}</td>
-                  <td className="p-2">{user.review}</td>
+              {filteredReviews.map((review, index) => (
+                <tr key={review.id} className="border-b">
+                  <td className="p-2 text-black">{index + 1}</td>
+                  <td className="p-2 text-black">{review.userEmail}</td>
+                  <td className="p-2 text-black">{review.placeName}</td>
+                  <td className="p-2 text-black">{review.comment}</td> 
                   <td className="p-2">
                     <div className="flex space-x-2">
                       <button
-                        className="p-1 hover:bg-gray-100 rounded"
-                        onClick={() => handleView(user.id)}
+                        className="p-2 bg-red-500 text-white rounded hover:bg-red-400 disabled:opacity-50"
+                        onClick={() => handleDeleteReview(review.id)}
+                        disabled={isLoading}
                       >
-                        <FaEye />
-                      </button>
-                      <button
-                        className="p-1 hover:bg-gray-100 rounded"
-                        onClick={() => handleEdit(user.id)}
-                      >
-                        <FaEdit />
-                      </button>
-                      <button
-                        className="p-1 hover:bg-gray-100 rounded"
-                        onClick={() => handleDelete(user.id)}
-                      >
-                        <FaTrash />
+                        Delete
                       </button>
                     </div>
                   </td>
