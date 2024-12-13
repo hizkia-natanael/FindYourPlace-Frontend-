@@ -23,7 +23,7 @@ const UserAdmin = () => {
 
   useEffect(() => {
     const fetchUsers = async () => {
-      const response = await fetch('/api/users');
+      const response = await fetch("/api/users");
       const data = await response.json();
       setUsers(data);
     };
@@ -78,7 +78,7 @@ const UserAdmin = () => {
           <div className="flex justify-between w-full mb-4 rounded-lg">
             <button
               className="bg-[#C66E4E] text-white px-4 py-2 rounded-lg"
-              onClick={() => navigate("/tambah-review")}
+              onClick={() => navigate("/admin/tambah-review")}
             >
               + Tambah Review
             </button>

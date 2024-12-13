@@ -1,12 +1,19 @@
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { HStack, VStack, Box, Text, Button } from "@chakra-ui/react";
 import { Image } from "@chakra-ui/react";
 import { MdLogout, MdOutlinePlace } from "react-icons/md";
 import { FaHome, FaUser } from "react-icons/fa";
 import { IoIosChatbubbles } from "react-icons/io";
+import { removeAccessToken } from "../../../utils/tokenManager.js";
 
 const Sidebar = () => {
   const navigate = useNavigate();
+
+  const handleLogout = () => {
+    removeAccessToken();
+    navigate("/login-admin");
+  };
+
   return (
     <VStack
       bg={"#FFFFFF"}
@@ -48,7 +55,7 @@ const Sidebar = () => {
         color={"#000000"}
         backgroundColor={"#FFFFFF"}
         justifyContent={"flex-start"}
-        onClick={() => navigate("/user-admin")}
+        onClick={() => navigate("/admin/user-admin")}
       >
         <FaUser /> Users
       </Button>
@@ -59,7 +66,7 @@ const Sidebar = () => {
         color={"#000000"}
         backgroundColor={"#FFFFFF"}
         justifyContent={"flex-start"}
-        onClick={() => navigate("/admin-place")}
+        onClick={() => navigate("/admin/admin-place")}
       >
         <MdOutlinePlace /> Places
       </Button>
@@ -70,18 +77,15 @@ const Sidebar = () => {
         color={"#000000"}
         backgroundColor={"#FFFFFF"}
         justifyContent={"flex-start"}
-        onClick={() => navigate("/review-admin")}
+        onClick={() => navigate("/admin/review-admin")}
       >
         <IoIosChatbubbles /> Reviews
       </Button>
-
       <Button
         w={"130px"}
         h={"40px"}
         backgroundColor={"#C66E4E"}
-        onClick={() => {
-          navigate("/");
-        }}
+        onClick={handleLogout}
         top={"5"}
       >
         <MdLogout /> Sign out
@@ -89,4 +93,5 @@ const Sidebar = () => {
     </VStack>
   );
 };
+
 export default Sidebar;
