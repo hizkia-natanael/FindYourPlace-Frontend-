@@ -69,7 +69,7 @@ const HeroSection = () => {
       </div>
       <div className="p-4">
         <h2 className="text-xl md:text-2xl font-bold text-orange-600 mb-4">
-          Rating Bagus
+          Tonkrongan Baru
         </h2>
         <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {cards.map((card, index) => (

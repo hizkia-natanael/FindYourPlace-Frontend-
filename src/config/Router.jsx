@@ -22,6 +22,9 @@ import UserTambah from "../pages/Admin/UserTambah.jsx";
 import PlacesAdmin from "../pages/Admin/PlaceAdmin.jsx";
 import AllPlace from "../pages/Admin/AllPlace.jsx";
 import ReviewTempat from "../pages/Daftar Tempat/ReviewTempat.jsx";
+import RegisterAdmin from "../pages/Admin/Register.jsx";
+import LoginAdmin from "../pages/Admin/Login.jsx";
+import { ProtectedRoute } from "../components/organisms";
 
 const router = createBrowserRouter([
   {
@@ -68,7 +71,57 @@ const router = createBrowserRouter([
   },
   {
     path: "/admin",
-    element: <DashboardAdmin />,
+    element: <ProtectedRoute />,
+    children: [
+      {
+        path: "",
+        element: <DashboardAdmin />,
+      },
+      {
+        path: "review-admin",
+        element: <ReviewAdmin />,
+      },
+      {
+        path: "detail-review",
+        element: <DetailReview />,
+      },
+      {
+        path: "edit-review",
+        element: <EditReview />,
+      },
+      {
+        path: "tambah-review",
+        element: <TambahReview />,
+      },
+      {
+        path: "admin-place",
+        element: <AllPlace />,
+      },
+      {
+        path: "add-place",
+        element: <PlacesAdmin />,
+      },
+      {
+        path: "edit-place/:id",
+        element: <PlacesAdmin />,
+      },
+      {
+        path: "user-admin",
+        element: <UserAdmin />,
+      },
+      {
+        path: "user-detail",
+        element: <UserDetail />,
+      },
+      {
+        path: "edit-user",
+        element: <EditUser />,
+      },
+      {
+        path: "user-tambah",
+        element: <UserTambah />,
+      },
+    ],
   },
   {
     path: "/login",
@@ -79,44 +132,12 @@ const router = createBrowserRouter([
     element: <RegisterPage />,
   },
   {
-    path: "/review-admin",
-    element: <ReviewAdmin />,
+    path: "/register-admin",
+    element: <RegisterAdmin />,
   },
   {
-    path: "/detail-review",
-    element: <DetailReview />,
-  },
-  {
-    path: "/edit-review",
-    element: <EditReview />,
-  },
-  {
-    path: "/tambah-review",
-    element: <TambahReview />,
-  },
-  {
-    path: "/admin-place",
-    element: <AllPlace />,
-  },
-  {
-    path: "/add-place",
-    element: <PlacesAdmin />,
-  },
-  {
-    path: "/user-admin",
-    element: <UserAdmin />,
-  },
-  {
-    path: "/user-detail",
-    element: <UserDetail />,
-  },
-  {
-    path: "/edit-user",
-    element: <EditUser />,
-  },
-  {
-    path: "/user-tambah",
-    element: <UserTambah />,
+    path: "/login-admin",
+    element: <LoginAdmin />,
   },
 ]);
 
