@@ -73,6 +73,17 @@ const usePlaceStore = create((set) => ({
       console.error(error);
     }
   },
+
+  searchPlaces: async (query) => {
+    try {
+      const { data } = await axiosInstance.get(`http://localhost:3000/api/v1/search?query=${query}`); // Perbarui URL di sini
+      return data;
+    } catch (error) {
+      console.error("Error searching places:", error.message);
+      throw error;
+    }
+  },
+  
 }));
 
 export default usePlaceStore;

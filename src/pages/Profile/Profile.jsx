@@ -1,28 +1,66 @@
-import React, { useState } from "react";
-import { Box, VStack, HStack, Flex} from "@chakra-ui/react";
+import React, { useState, useEffect } from "react";
+import { 
+  Box, 
+  VStack, 
+  HStack, 
+  Flex, 
+  Text,
+  Button,
+  Heading,
+  Input,
+  Spinner
+} from "@chakra-ui/react";
 import { Avatar } from "../../components/ui/avatar";
-import { Text } from "@chakra-ui/react";
-import { Button } from "@chakra-ui/react";
-import { Heading } from "@chakra-ui/react";
-import { Input } from "@chakra-ui/react";
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
+import { getProfile, signOut } from "../../config/authStore.js"; // Pastikan path impor benar
 
 const Profile = () => {
-  const [name, setName] = useState("Sarah");
-  const [email, setEmail] = useState("sarah@gmail.com");
-  const [password, setPassword] = useState("********");
+  const [profile, setProfile] = useState({
+    username: '',
+    email: ''
+  });
+  const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
 
-  const navigate = useNavigate(); // Inisialisasi useNavigate
+  useEffect(() => {
+    // Ambil profil pengguna saat komponen dimuat
+    const fetchProfile = async () => {
+      try {
+        const userData = await getProfile();
+        setProfile(userData);
+        setIsLoading(false);
+      } catch (error) {
+        console.error("Gagal Mengambil Profil:", error);
+        setIsLoading(false);
+        // Arahkan ke halaman login jika gagal
+        navigate("/login");
+      }
+    };
 
-  const handleSignOut = () => {
-    console.log("User has signed out!");
-    // Tambahkan logika untuk mengarahkan pengguna ke halaman login setelah sign out
-    navigate("/login"); // Ganti dengan path yang sesuai untuk halaman login
+    fetchProfile();
+  }, [navigate]);
+
+  const handleSignOut = async () => {
+    try {
+      await signOut();
+      console.log("Berhasil Keluar");
+      navigate("/login");
+    } catch (error) {
+      console.error("Gagal Keluar:", error);
+    }
   };
 
   const handleEditProfile = () => {
-    navigate("/edit-profile"); // Arahkan ke halaman EditProfile.jsx
+    navigate("/edit-profile");
   };
+
+  if (isLoading) {
+    return (
+      <Flex justify="center" align="center" height="100vh">
+        <Spinner size="xl" />
+      </Flex>
+    );
+  }
 
   return (
     <Box bg="gray.100" minH="100vh" p={1}>
@@ -84,11 +122,12 @@ const Profile = () => {
               Nama
             </Text>
             <Input
-              value={name}
+              value={profile.username}
               onChange={(e) => setName(e.target.value)}
               placeholder="Sarah"
               variant="outline"
               focusBorderColor="orange.400"
+              color={"black"}
             />
           </Box>
 
@@ -98,27 +137,13 @@ const Profile = () => {
               Email
             </Text>
             <Input
-              value={email}
+              value={profile.email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="sarah@gmail.com"
               type="email"
               variant="outline"
               focusBorderColor="orange.400"
-            />
-          </Box>
-
-          {/* Password */}
-          <Box w="full">
-            <Text mb={1} fontWeight="medium" color="gray.700">
-              Password
-            </Text>
-            <Input
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="********"
-              type="password"
-              variant="outline"
-              focusBorderColor="orange.400"
+              color={"black"}
             />
           </Box>
         </VStack>
