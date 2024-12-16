@@ -35,20 +35,14 @@ const Header = () => {
           >
             Kontak
           </Link>
-        </nav>
 
-        {/* Login Button with Icon */}
-        <div className="hidden md:flex items-center">
-          {/* Icon FaUserCircle with Link */}
-          <Link to="/profile" className="mr-4">
-            <FaUserCircle className="text-4xl text-gray-700" />
+          <Link
+            to="/profile"
+            className="text-gray-700 text-sm hover:text-[#c66e4e]"
+          >
+            Profile
           </Link>
-          <Link to="/login">
-            <Button className="bg-[#c66e4e] text-white">
-              Login
-            </Button>
-          </Link>
-        </div>
+        </nav>
 
         {/* Hamburger Icon */}
         <div className="md:hidden flex items-center">

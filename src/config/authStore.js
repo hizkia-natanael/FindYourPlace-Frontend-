@@ -4,28 +4,21 @@ const API_URL = 'http://localhost:3000/api/v1/auth';
 
 const login = async (email, password) => {
   try {
-    const response = await axios.post('http://localhost:3000/api/v1/auth/login', {
+    const response = await axios.post(`${API_URL}/login`, {
       email,
       password,
     });
 
-    // Akses token dari response.data.data.token
     const token = response.data.data.token;
-
-    console.log('Token yang diterima:', token);
 
     if (token) {
       localStorage.setItem('token', token);
-      console.log("Token berhasil disimpan di localStorage");
-      
-      // Simpan informasi user lainnya jika diperlukan
       localStorage.setItem('userId', response.data.data.userId);
       localStorage.setItem('username', response.data.data.username);
       localStorage.setItem('email', response.data.data.email);
 
       return response.data.data;
     } else {
-      console.error('Token tidak ditemukan dalam respons');
       throw new Error('Login gagal: Tidak ada token');
     }
   } catch (error) {
@@ -34,46 +27,92 @@ const login = async (email, password) => {
   }
 };
 
-
-
-// Fungsi untuk register
+// Fungsi register
 const register = async (username, email, password) => {
   try {
     const response = await axios.post(`${API_URL}/register`, { username, email, password });
-    return response.data; // Mengembalikan data pengguna atau token
+    return response.data;
   } catch (error) {
     console.error('Error during registration:', error.response?.data?.message || error.message);
     throw error.response?.data?.message || 'Registrasi gagal';
   }
 };
 
-// Fungsi untuk mengambil semua pengguna
-const getAllUsers = async () => {
+// Fungsi untuk mengambil profil pengguna
+const getProfile = async () => {
   try {
     const token = localStorage.getItem("token");
-    console.log("Token:", token);
+    
+    if (!token) {
+      throw new Error('Tidak ada token yang tersimpan');
+    }
 
-    const response = await axios.get(`${API_URL}/users`, {
+    const response = await axios.get(`${API_URL}/profile`, {
       headers: {
-        Authorization: `Bearer ${token}`, // Kirim token di header Authorization
+        Authorization: `Bearer ${token}`,
       },
     });
-    return response.data; // Mengembalikan daftar pengguna
+
+    return response.data.data;
   } catch (error) {
-    console.error('Error during fetching users:', error.response?.data?.message || error.message);
-    throw error.response?.data?.message || 'Gagal mengambil data pengguna';
+    console.error('Error saat mengambil profil:', error.response?.data?.message || error.message);
+    throw error.response?.data?.message || 'Gagal mengambil profil';
   }
 };
 
-const handleDeleteUser = async (userId) => {
+// Fungsi baru untuk memperbarui profil
+const updateProfile = async (updateData) => {
   try {
-    await deleteUser(userId); // Panggil fungsi deleteUser
-    setUsers(users.filter((user) => user._id !== userId)); // Hapus user dari state lokal
-    console.log(`Pengguna dengan ID ${userId} berhasil dihapus.`);
+    const token = localStorage.getItem("token");
+    
+    if (!token) {
+      throw new Error('Tidak ada token yang tersimpan');
+    }
+
+    const response = await axios.put(`${API_URL}/edit-profile`, updateData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    return response.data.data;
   } catch (error) {
-    console.error("Gagal menghapus pengguna:", error);
+    console.error('Error saat memperbarui profil:', error.response?.data?.message || error.message);
+    throw error.response?.data?.message || 'Gagal memperbarui profil';
   }
 };
 
+// Fungsi sign out
+const signOut = async () => {
+  try {
+    const token = localStorage.getItem("token");
+    
+    if (!token) {
+      throw new Error('Tidak ada token yang tersimpan');
+    }
 
-export { login, register, getAllUsers, handleDeleteUser };
+    await axios.post(`${API_URL}/signout`, {}, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    localStorage.removeItem('token');
+    localStorage.removeItem('userId');
+    localStorage.removeItem('username');
+    localStorage.removeItem('email');
+
+    return true;
+  } catch (error) {
+    console.error('Error saat sign out:', error.response?.data?.message || error.message);
+    throw error.response?.data?.message || 'Gagal sign out';
+  }
+};
+
+export { 
+  login, 
+  register, 
+  getProfile, 
+  updateProfile,
+  signOut 
+};
