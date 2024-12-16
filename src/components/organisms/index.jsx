@@ -5,6 +5,7 @@ import FindYourPlace from "./FindYourPlace";
 import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
 import Sidebar from "./Sidebar";
+import ProtectedRoute from "./ProtectedRoute";
 
 export {
   HeroSection,
@@ -14,4 +15,5 @@ export {
   LoginForm,
   RegisterForm,
   Sidebar,
+  ProtectedRoute,
 };

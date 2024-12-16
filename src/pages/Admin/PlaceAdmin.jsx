@@ -56,7 +56,7 @@ const PlacesAdmin = () => {
     } else {
       addPlace(form);
     }
-    navigate("/daftar-tempat");
+    navigate("/admin/admin-place");
   };
 
   return (
