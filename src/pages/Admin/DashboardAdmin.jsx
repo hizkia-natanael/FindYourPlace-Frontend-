@@ -1,21 +1,74 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { 
   Box, 
   VStack, 
-  HStack, 
-  Image, 
   Text, 
   Flex, 
-  Spacer, 
-  Container,
   SimpleGrid
 } from "@chakra-ui/react";
 import { Sidebar } from "../../components/organisms";
 import { AdminHeader } from "../../components/organisms/Header/HeaderAdmin";
+import axios from 'axios';
 
 const DashboardAdmin = () => {
   const navigate = useNavigate();
+  const [userCount, setUserCount] = useState(0);
+  const [placeCount, setPlaceCount] = useState(0);
+  const [reviewCount, setReviewCount] = useState(0);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        if (!token) {
+          navigate('/login');
+          return;
+        }
+
+        const config = {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        };
+
+        // Log full response untuk debugging
+        const usersResponse = await axios.get('http://localhost:3000/api/v1/auth/users', config);
+        const placesResponse = await axios.get('http://localhost:3000/api/v1/place', config);
+        const reviewsResponse = await axios.get('http://localhost:3000/api/v1/reviews', config);
+
+        console.log('Users Response:', usersResponse.data);
+        console.log('Places Response:', placesResponse.data);
+        console.log('Reviews Response:', reviewsResponse.data);
+
+        // Fungsi pembantu untuk mengekstrak count
+        const extractCount = (data) => {
+          if (typeof data === 'object') {
+            // Coba berbagai kemungkinan path untuk count
+            return data.count || 
+                   data.total || 
+                   data.length || 
+                   (data.data && (data.data.count || data.data.total || data.data.length)) || 
+                   0;
+          }
+          return 0;
+        };
+
+        setUserCount(extractCount(usersResponse.data));
+        setPlaceCount(extractCount(placesResponse.data));
+        setReviewCount(extractCount(reviewsResponse.data));
+        
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        console.error("Error details:", error.response?.data);
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [navigate]);
 
   return (
     <Flex 
@@ -44,6 +97,7 @@ const DashboardAdmin = () => {
         <VStack 
           spacing={5} 
           align="stretch"
+          width="100%"
         >
           {/* Dashboard Cards */}
           <SimpleGrid 
@@ -78,7 +132,7 @@ const DashboardAdmin = () => {
                 fontWeight="bold" 
                 color="blue.500"
               >
-                0
+                {loading ? 'Loading...' : userCount}
               </Text>
             </Box>
 
@@ -109,7 +163,7 @@ const DashboardAdmin = () => {
                 fontWeight="bold" 
                 color="green.500"
               >
-                0
+                {loading ? 'Loading...' : placeCount}
               </Text>
             </Box>
 
@@ -140,12 +194,10 @@ const DashboardAdmin = () => {
                 fontWeight="bold" 
                 color="purple.500"
               >
-                0
+                {loading ? 'Loading...' : reviewCount}
               </Text>
             </Box>
           </SimpleGrid>
-
-          {/* Additional Dashboard Sections can be added here */}
         </VStack>
       </Flex>
     </Flex>

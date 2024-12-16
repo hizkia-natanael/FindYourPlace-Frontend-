@@ -24,7 +24,7 @@ const KontakKami = () => {
   };
 
   return (
-    <Box bg="white" color="black" pt={20} pb={8}>
+    <Box bg="white" color="black" pt={20} pb={8} display="flex" justifyContent="center" alignItems="center">
       <Container maxW="4xl">
         {/* Judul "KONTAK" */}
         <Heading
@@ -49,11 +49,7 @@ const KontakKami = () => {
           Silakan hubungi kami melalui kontak yang tertera atau formulir di bawah ini.
         </Text>
 
-        {/* Dua kotak kosong di bawah */}
-        <Grid templateColumns="1fr 1fr" gap={6}>
-          {/* Kotak Kiri untuk Informasi Kontak */}
-          <GridItem>
-            <Box 
+        <Box 
               bg="white" 
               h="350px" 
               border="2px" 
@@ -61,6 +57,7 @@ const KontakKami = () => {
               borderRadius="md" 
               boxShadow="lg"
               p={6}
+              justifyContent={"center"}
             >
               <Stack spacing={4}>
                 {/* Alamat */}
@@ -92,84 +89,6 @@ const KontakKami = () => {
                 <Text fontSize="md" ml={10}>+62 811 2345 6789</Text>
               </Stack>
             </Box>
-          </GridItem>
-
-          {/* Kotak Kanan untuk Formulir Kontak */}
-          <GridItem>
-            <Box 
-              bg="white" 
-              h="350px" 
-              border="2px" 
-              borderColor="black" 
-              borderRadius="md" 
-              boxShadow="lg"
-              p={6}
-            >
-              <Heading fontSize="xl" fontWeight="bold" mb={4} textAlign={"center"}>Kirim Pesan</Heading>
-              
-              {/* Formulir */}
-              <form onSubmit={handleSubmit}>
-                {/* Nama */}
-                <Stack spacing={4}>
-                  <Input 
-                    name="nama"
-                    value={formData.nama}
-                    onChange={handleInputChange}
-                    placeholder="Nama Lengkap"
-                    variant="unstyled" // Menggunakan garis bawah
-                    borderBottom="2px solid #AD5738"
-                    _focus={{ borderBottom: "2px solid #AD5738" }} // Fokus dengan warna garis bawah
-                    _placeholder={{
-                      lineHeight: "48px", // Placeholder di tengah vertikal
-                    }}
-                  />
-
-                  {/* Email */}
-                  <Input 
-                    name="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    placeholder="Email"
-                    variant="unstyled"
-                    borderBottom="2px solid #AD5738"
-                    _focus={{ borderBottom: "2px solid #AD5738" }} 
-                    _placeholder={{
-                      lineHeight: "48px", // Placeholder di tengah vertikal
-                    }}
-                  />
-                  
-
-                  {/* Pesan */}
-                  <Textarea
-                    name="pesan"
-                    value={formData.pesan}
-                    onChange={handleInputChange}
-                    placeholder="Isi Pesan"
-                    variant="unstyled"
-                    borderBottom="2px solid #AD5738"
-                    _focus={{ borderBottom: "2px solid #AD5738" }}
-                    resize="h" // Agar textarea bisa di-resize secara vertikal
-                    _placeholder={{
-                      lineHeight: "48px", // Placeholder di tengah vertikal
-                    }}
-                  />
-
-                  {/* Tombol Kirim */}
-                  <Button
-                    type="submit"
-                    bg="#AD5738"
-                    color="white"
-                    _hover={{ bg: "#D87B50" }}
-                    mt={4}
-                    w="full"
-                  >
-                    Kirim Pesan
-                  </Button>
-                </Stack>
-              </form>
-            </Box>
-          </GridItem>
-        </Grid>
       </Container>
     </Box>
   );

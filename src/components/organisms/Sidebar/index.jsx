@@ -42,7 +42,6 @@ const Sidebar = () => {
         w={"full"}
         h={"40px"}
         color={"#000000"}
-        backgroundColor={"#C66E4E"}
         justifyContent={"flex-start"}
         onClick={() => navigate("/admin")}
       >
