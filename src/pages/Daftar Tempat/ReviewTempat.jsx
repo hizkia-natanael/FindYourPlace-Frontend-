@@ -115,7 +115,7 @@ const ReviewGambar = () => {
           {/* Place Image */}
           <div className="lg:col-span-1">
             <img
-              src={`http://localhost:3000/uploads/${data.image}`}
+              src={`https://findyourplace-backend-production.up.railway.app/uploads/${data.image}`}
               alt={data.name}
               className="w-full h-72 object-cover rounded-md shadow-md"
               onError={(e) => {
