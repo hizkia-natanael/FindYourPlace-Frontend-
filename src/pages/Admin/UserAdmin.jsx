@@ -24,7 +24,7 @@ const UserAdmin = () => {
         if (!token) throw new Error("Token tidak ditemukan");
 
         const response = await axios.get(
-          "https://findyourplace-backend-production.up.railway.app/api/v1auth/users",
+          "https://findyourplace-backend-production.up.railway.app/api/v1/auth/users",
           {
             headers: {
               Authorization: `Bearer ${token}`,
