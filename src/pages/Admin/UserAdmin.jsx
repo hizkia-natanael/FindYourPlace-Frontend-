@@ -1,7 +1,14 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { FaHome, FaUser, FaEye, FaEdit, FaTrash, FaSearch } from "react-icons/fa";
+import {
+  FaHome,
+  FaUser,
+  FaEye,
+  FaEdit,
+  FaTrash,
+  FaSearch,
+} from "react-icons/fa";
 import Logo from "../../assets/logo.svg";
 import { Sidebar } from "../../components/organisms";
 
@@ -16,14 +23,20 @@ const UserAdmin = () => {
         const token = localStorage.getItem("token");
         if (!token) throw new Error("Token tidak ditemukan");
 
-        const response = await axios.get("http://localhost:3000/api/v1/auth/users", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        setUsers(response.data); 
+        const response = await axios.get(
+          "http://localhost:3000/api/v1/auth/users",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        setUsers(response.data);
       } catch (error) {
-        console.error("Gagal mengambil data pengguna:", error.response?.data?.message || error.message);
+        console.error(
+          "Gagal mengambil data pengguna:",
+          error.response?.data?.message || error.message
+        );
       }
     };
 
@@ -42,17 +55,23 @@ const UserAdmin = () => {
         return;
       }
 
-      const response = await axios.delete(`http://localhost:3000/api/v1/auth/users/${userId}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await axios.delete(
+        `http://localhost:3000/api/v1/auth/users/${userId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       if (response.status === 200) {
         setUsers(users.filter((user) => user._id !== userId));
       }
     } catch (error) {
-      console.error("Gagal menghapus pengguna:", error.response?.data?.message || error.message);
+      console.error(
+        "Gagal menghapus pengguna:",
+        error.response?.data?.message || error.message
+      );
     }
   };
 
@@ -66,8 +85,10 @@ const UserAdmin = () => {
 
   const filteredUsers = users.filter(
     (user) =>
-      (user.name && user.name.toLowerCase().includes(searchQuery.toLowerCase())) ||
-      (user.email && user.email.toLowerCase().includes(searchQuery.toLowerCase()))
+      (user.name &&
+        user.name.toLowerCase().includes(searchQuery.toLowerCase())) ||
+      (user.email &&
+        user.email.toLowerCase().includes(searchQuery.toLowerCase()))
   );
 
   return (
@@ -81,13 +102,6 @@ const UserAdmin = () => {
 
         <div className="bg-white flex-1 p-4 m-4 rounded-lg overflow-auto">
           <div className="flex justify-between items-center mb-4">
-            <button
-              className="bg-[#C66E4E] text-white px-4 py-2 rounded"
-              onClick={handleAddUser}
-            >
-              + Tambah User
-            </button>
-
             <div className="relative w-1/3">
               <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-300" />
               <input
