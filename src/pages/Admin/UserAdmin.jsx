@@ -24,7 +24,7 @@ const UserAdmin = () => {
         if (!token) throw new Error("Token tidak ditemukan");
 
         const response = await axios.get(
-          "http://localhost:3000/api/v1/auth/users",
+          "https://find-your-place-frontend.vercel.app/api/v1/auth/users",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -56,7 +56,7 @@ const UserAdmin = () => {
       }
 
       const response = await axios.delete(
-        `http://localhost:3000/api/v1/auth/users/${userId}`,
+        `https://find-your-place-frontend.vercel.app/api/v1/auth/users/${userId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
