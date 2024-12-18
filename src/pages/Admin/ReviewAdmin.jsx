@@ -14,19 +14,18 @@ const UserAdmin = () => {
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        const reviews = await getReviews();
-        console.log("Original Reviews:", reviews); // Tambahkan ini untuk memeriksa struktur data
-
-        const processedReviews = reviews.map((review) => {
-          console.log("Single Review:", review); // Tambahkan ini untuk melihat setiap review
-
+        const reviews = await getReviews(); 
+        console.log('Original Reviews:', reviews); // Memeriksa struktur data
+  
+        const processedReviews = reviews.map(review => {
+          console.log('Single Review:', review); // Memeriksa setiap review
+  
           return {
             ...review,
-            id: review._id || review.id, // Tambahkan fallback untuk ID
-            userName:
-              review.userId.name || review.userId.email || "Unknown User",
-            userEmail: review.userId.email || "Unknown Email",
-            placeName: review.placeId.name || "Unknown Place",
+            id: review._id || review.id, // Fallback untuk ID
+            userName: review.userId.name || review.userId.email || 'Unknown User',
+            userEmail: review.userId.email || 'Unknown Email',
+            placeName: review.placeId.name || 'Unknown Place'
           };
         });
 
