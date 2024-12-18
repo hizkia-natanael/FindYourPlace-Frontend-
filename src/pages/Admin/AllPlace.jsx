@@ -105,7 +105,7 @@ const AllPlace = () => {
                   <td>
                     <img
                       className="w-10 p-1"
-                      src={`https://find-your-place-frontend.vercel.app/uploads/${place.image}`}
+                      src={`https://findyourplace-backend-production.up.railway.app/uploads/${place.image}`}
                       alt=""
                     />
                   </td>

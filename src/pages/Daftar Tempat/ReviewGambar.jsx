@@ -60,7 +60,7 @@ const ReviewGambar = () => {
       }
   
       // Kirim review dengan axios
-      const response = await axios.post('http://localhost:3000/api/v1/reviews', 
+      const response = await axios.post('https://findyourplace-backend-production.up.railway.app/api/v1/reviews', 
         {
           placeId: id, 
           userId: userId, 

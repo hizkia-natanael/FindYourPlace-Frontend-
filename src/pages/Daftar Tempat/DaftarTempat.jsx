@@ -43,7 +43,7 @@ const DaftarTempat = ({ _id }) => {
               <Card
                 key={index}
                 name={place.name}
-                image={`http://localhost:3000/uploads/${place.image}`}
+                image={`https://findyourplace-backend-production.up.railway.app/uploads/${place.image}`}
                 alt={place.name}
                 address={place.address}
               />

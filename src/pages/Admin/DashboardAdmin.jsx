@@ -34,9 +34,9 @@ const DashboardAdmin = () => {
         };
 
         // Log full response untuk debugging
-        const usersResponse = await axios.get('http://localhost:3000/api/v1/auth/users', config);
-        const placesResponse = await axios.get('http://localhost:3000/api/v1/place', config);
-        const reviewsResponse = await axios.get('http://localhost:3000/api/v1/reviews', config);
+        const usersResponse = await axios.get('https://findyourplace-backend-production.up.railway.app/api/v1/auth/users', config);
+        const placesResponse = await axios.get('https://findyourplace-backend-production.up.railway.app/api/v1/v1/place', config);
+        const reviewsResponse = await axios.get('https://findyourplace-backend-production.up.railway.app/api/v1/reviews', config);
 
         console.log('Users Response:', usersResponse.data);
         console.log('Places Response:', placesResponse.data);

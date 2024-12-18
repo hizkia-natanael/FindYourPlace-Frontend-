@@ -42,7 +42,7 @@ const ReviewGambar = () => {
         setData(placeData);
 
         const { data: reviewResponse } = await axios.get(
-          `http://localhost:3000/api/v1/reviews/${id}`
+          `https://findyourplace-backend-production.up.railway.app/api/v1/reviews/${id}`
         );
 
         setReviews(Array.isArray(reviewResponse.data) ? reviewResponse.data : []);
