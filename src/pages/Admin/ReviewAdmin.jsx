@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { getReviews, deleteReview } from "../../config/reviewStore.js";  
+import { getReviews, deleteReview } from "../../config/reviewStore.js";
 import { Sidebar } from "../../components/organisms";
 import { AdminHeader } from "../../components/organisms/Header/HeaderAdmin";
 
 const UserAdmin = () => {
-  const [existingReviews, setExistingReviews] = useState([]); 
+  const [existingReviews, setExistingReviews] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [sortOrder, setSortOrder] = useState("latest");
   const [showCount, setShowCount] = useState(10);
@@ -14,35 +14,37 @@ const UserAdmin = () => {
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        const reviews = await getReviews(); 
-        console.log('Original Reviews:', reviews); // Tambahkan ini untuk memeriksa struktur data
-  
-        const processedReviews = reviews.map(review => {
-          console.log('Single Review:', review); // Tambahkan ini untuk melihat setiap review
-  
+        const reviews = await getReviews();
+        console.log("Original Reviews:", reviews); // Tambahkan ini untuk memeriksa struktur data
+
+        const processedReviews = reviews.map((review) => {
+          console.log("Single Review:", review); // Tambahkan ini untuk melihat setiap review
+
           return {
             ...review,
             id: review._id || review.id, // Tambahkan fallback untuk ID
-            userName: review.userId.name || review.userId.email || 'Unknown User',
-            userEmail: review.userId.email || 'Unknown Email',
-            placeName: review.placeId.name || 'Unknown Place'
+            userName:
+              review.userId.name || review.userId.email || "Unknown User",
+            userEmail: review.userId.email || "Unknown Email",
+            placeName: review.placeId.name || "Unknown Place",
           };
         });
-  
-        setExistingReviews(processedReviews); 
+
+        setExistingReviews(processedReviews);
       } catch (error) {
-        console.error('Error fetching reviews:', error.message);
+        console.error("Error fetching reviews:", error.message);
       }
     };
     fetchReviews();
-  }, []); 
+  }, []);
 
   // Filter reviews based on searchTerm
   const filteredReviews = existingReviews
-    .filter((review) =>
-      review.comment.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      review.userEmail.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      review.placeName.toLowerCase().includes(searchTerm.toLowerCase())
+    .filter(
+      (review) =>
+        review.comment.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        review.userEmail.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        review.placeName.toLowerCase().includes(searchTerm.toLowerCase())
     )
     .slice(0, showCount);
 
@@ -69,18 +71,18 @@ const UserAdmin = () => {
   const handleDeleteReview = async (reviewId) => {
     try {
       setIsLoading(true);
-      // Call delete API 
+      // Call delete API
       await deleteReview(reviewId);
-      
+
       // Remove the deleted review from the state
-      setExistingReviews(prevReviews => 
-        prevReviews.filter(review => review.id !== reviewId)
+      setExistingReviews((prevReviews) =>
+        prevReviews.filter((review) => review.id !== reviewId)
       );
-      
+
       setError(null);
     } catch (error) {
-      console.error('Error deleting review:', error.message);
-      setError('Failed to delete review. Please try again.');
+      console.error("Error deleting review:", error.message);
+      setError("Failed to delete review. Please try again.");
     } finally {
       setIsLoading(false);
     }
@@ -95,7 +97,7 @@ const UserAdmin = () => {
       <AdminHeader />
       <div className="flex min-h-[100vh]">
         <Sidebar />
-        
+
         <div className="bg-white flex-1 min-h-[100vh] rounded-lg p-16 ml-8 flex flex-col space-y-4 items-start">
           {/* Error Message */}
           {error && (
@@ -162,25 +164,23 @@ const UserAdmin = () => {
               </tr>
             </thead>
             <tbody>
-              {filteredReviews.map((review, index) => (
-                <tr key={review.id} className="border-b">
-                  <td className="p-2 text-black">{index + 1}</td>
-                  <td className="p-2 text-black">{review.userEmail}</td>
-                  <td className="p-2 text-black">{review.placeName}</td>
-                  <td className="p-2 text-black">{review.comment}</td> 
-                  <td className="p-2">
-                    <div className="flex space-x-2">
-                      <button
-                        className="p-2 bg-red-500 text-white rounded hover:bg-red-400 disabled:opacity-50"
-                        onClick={() => handleDeleteReview(review.id)}
-                        disabled={isLoading}
-                      >
-                        Delete
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
+              <tr className="border-b">
+                <td className="p-2 text-black">1</td>
+                <td className="p-2 text-black">fathul@gmail.com</td>
+                <td className="p-2 text-black">Kupiku Coffee Umbulharjo</td>
+                <td className="p-2 text-black">Bagus Sekali</td>
+                <td className="p-2">
+                  <div className="flex space-x-2">
+                    <button
+                      className="p-2 bg-red-500 text-white rounded hover:bg-red-400 disabled:opacity-50"
+                      onClick={() => handleDeleteReview(review.id)}
+                      disabled={isLoading}
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>
