@@ -125,13 +125,6 @@ const UserAdmin = () => {
                       <div className="flex space-x-2">
                         <button
                           className="p-1 text-black hover:bg-gray-100 rounded"
-                          onClick={() => handleViewUser(user)}
-                          title="Lihat Detail"
-                        >
-                          <FaEye />
-                        </button>
-                        <button
-                          className="p-1 text-black hover:bg-gray-100 rounded"
                           onClick={() => handleDeleteUser(user._id)}
                           title="Hapus User"
                         >

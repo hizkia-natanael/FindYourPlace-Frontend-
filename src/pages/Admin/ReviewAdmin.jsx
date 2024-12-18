@@ -15,14 +15,14 @@ const UserAdmin = () => {
     const fetchReviews = async () => {
       try {
         const reviews = await getReviews(); 
-        console.log('Original Reviews:', reviews); // Tambahkan ini untuk memeriksa struktur data
+        console.log('Original Reviews:', reviews); // Memeriksa struktur data
   
         const processedReviews = reviews.map(review => {
-          console.log('Single Review:', review); // Tambahkan ini untuk melihat setiap review
+          console.log('Single Review:', review); // Memeriksa setiap review
   
           return {
             ...review,
-            id: review._id || review.id, // Tambahkan fallback untuk ID
+            id: review._id || review.id, // Fallback untuk ID
             userName: review.userId.name || review.userId.email || 'Unknown User',
             userEmail: review.userId.email || 'Unknown Email',
             placeName: review.placeId.name || 'Unknown Place'
