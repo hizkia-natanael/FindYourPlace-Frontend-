@@ -1,74 +1,177 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from 'axios';
+
+// Components
+import { Sidebar } from "../../components/organisms";
+import { AdminHeader } from "../../components/organisms/Header/HeaderAdmin";
+
+// Chakra UI Components
 import { 
   Box, 
   VStack, 
   Text, 
   Flex, 
-  SimpleGrid
+  SimpleGrid,
+  useToast
 } from "@chakra-ui/react";
-import { Sidebar } from "../../components/organisms";
-import { AdminHeader } from "../../components/organisms/Header/HeaderAdmin";
-import axios from 'axios';
+
+// Constants
+const API_BASE_URL = 'https://findyourplace-backend-production.up.railway.app/api/v1';
+const API_ENDPOINTS = {
+  users: `${API_BASE_URL}/auth/users`,
+  places: `${API_BASE_URL}/place`,
+  reviews: `${API_BASE_URL}/reviews`
+};
+
+// Dashboard Card Component
+const DashboardCard = ({ title, description, count, loading, color }) => (
+  <Box
+    bg="white"
+    borderRadius="lg"
+    p={6}
+    boxShadow="md"
+    transition="transform 0.2s"
+    _hover={{ transform: 'translateY(-2px)' }}
+  >
+    <Text 
+      fontSize="xl" 
+      fontWeight="bold" 
+      mb={2}
+      color="black"
+    >
+      {title}
+    </Text>
+    <Text 
+      color="gray.600"
+      fontSize="md"
+    >
+      {description}
+    </Text>
+    <Text 
+      mt={4} 
+      fontSize="2xl" 
+      fontWeight="bold" 
+      color={color}
+    >
+      {loading ? 'Loading...' : count}
+    </Text>
+  </Box>
+);
 
 const DashboardAdmin = () => {
   const navigate = useNavigate();
-  const [userCount, setUserCount] = useState(0);
-  const [placeCount, setPlaceCount] = useState(0);
-  const [reviewCount, setReviewCount] = useState(0);
+  const toast = useToast();
+  
+  // State
+  const [dashboardData, setDashboardData] = useState({
+    users: 0,
+    places: 0,
+    reviews: 0
+  });
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        if (!token) {
-          navigate('/login');
-          return;
-        }
-
-        const config = {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        };
-
-        // Log full response untuk debugging
-        const usersResponse = await axios.get('https://findyourplace-backend-production.up.railway.app/api/v1/auth/users', config);
-        const placesResponse = await axios.get('https://findyourplace-backend-production.up.railway.app/api/v1/v1/place', config);
-        const reviewsResponse = await axios.get('https://findyourplace-backend-production.up.railway.app/api/v1/reviews', config);
-
-        console.log('Users Response:', usersResponse.data);
-        console.log('Places Response:', placesResponse.data);
-        console.log('Reviews Response:', reviewsResponse.data);
-
-        // Fungsi pembantu untuk mengekstrak count
-        const extractCount = (data) => {
-          if (typeof data === 'object') {
-            // Coba berbagai kemungkinan path untuk count
-            return data.count || 
-                   data.total || 
-                   data.length || 
-                   (data.data && (data.data.count || data.data.total || data.data.length)) || 
-                   0;
-          }
-          return 0;
-        };
-
-        setUserCount(extractCount(usersResponse.data));
-        setPlaceCount(extractCount(placesResponse.data));
-        setReviewCount(extractCount(reviewsResponse.data));
-        
-        setLoading(false);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-        console.error("Error details:", error.response?.data);
-        setLoading(false);
+  // Helper function to extract count from API response
+  const extractCount = (data) => {
+    console.log('Processing data:', data);
+    
+    if (Array.isArray(data)) {
+      return data.length;
+    }
+    
+    if (typeof data === 'object' && data !== null) {
+      // If data is in data property and is an array
+      if (data.data && Array.isArray(data.data)) {
+        return data.data.length;
       }
-    };
+      
+      // Check for standard count properties
+      if (data.count !== undefined) return data.count;
+      if (data.total !== undefined) return data.total;
+      if (data.data?.count !== undefined) return data.data.count;
+      if (data.data?.total !== undefined) return data.data.total;
+    }
+    
+    return 0;
+  };
 
-    fetchData();
-  }, [navigate]);
+  // Fetch data from API
+  const fetchDashboardData = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      
+      if (!token) {
+        navigate('/login');
+        return;
+      }
+
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+
+      // Fetch all data concurrently
+      const [usersRes, placesRes, reviewsRes] = await Promise.all([
+        axios.get(API_ENDPOINTS.users, config),
+        axios.get(API_ENDPOINTS.places, config),
+        axios.get(API_ENDPOINTS.reviews, config)
+      ]);
+
+      // Log responses for debugging
+      console.log('API Responses:', {
+        users: usersRes.data,
+        places: placesRes.data,
+        reviews: reviewsRes.data
+      });
+
+      // Update state with extracted counts
+      setDashboardData({
+        users: extractCount(usersRes.data),
+        places: extractCount(placesRes.data),
+        reviews: extractCount(reviewsRes.data)
+      });
+
+    } catch (error) {
+      console.error('API Error:', error);
+      
+      toast({
+        title: 'Error fetching dashboard data',
+        description: error.response?.data?.message || 'Please try again later',
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+      });
+
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchDashboardData();
+  }, [navigate]); // Only re-run if navigate function changes
+
+  const dashboardCards = [
+    {
+      title: "Total Users",
+      description: "Total users yang terdaftar",
+      count: dashboardData.users,
+      color: "blue.500"
+    },
+    {
+      title: "Total Places",
+      description: "Total Tempat yang telah dimasukan Admin",
+      count: dashboardData.places,
+      color: "green.500"
+    },
+    {
+      title: "Total Reviews",
+      description: "Total review yang telah diulas user",
+      count: dashboardData.reviews,
+      color: "purple.500"
+    }
+  ];
 
   return (
     <Flex 
@@ -76,127 +179,32 @@ const DashboardAdmin = () => {
       minHeight="100vh" 
       bg="#E8E8E8"
     >
-      {/* Header */}
       <AdminHeader />
 
-      {/* Main Content Area */}
-      <Flex 
-        flex={1} 
-        mt={4} 
-        mx={4}
-      >
-        {/* Sidebar */}
-        <Box 
-          width="250px" 
-          mr={4}
-        >
+      <Flex flex={1} mt={4} mx={4}>
+        <Box width="250px" mr={4}>
           <Sidebar />
         </Box>
 
-        {/* Main Dashboard Content */}
         <VStack 
           spacing={5} 
           align="stretch"
           width="100%"
         >
-          {/* Dashboard Cards */}
           <SimpleGrid 
             columns={{ base: 1, md: 3 }} 
-            spacing={4}
-            gap={6}
+            spacing={6}
           >
-            {/* Total Users Card */}
-            <Box
-              bg="white"
-              borderRadius="lg"
-              p={4}
-              boxShadow="md"
-            >
-              <Text 
-                fontSize="xl" 
-                fontWeight="bold" 
-                mb={2}
-                color={"black"}
-              >
-                Total Users
-              </Text>
-              <Text 
-                color="gray.600"
-                fontSize="md"
-              >
-                Total users yang terdaftar
-              </Text>
-              <Text 
-                mt={4} 
-                fontSize="2xl" 
-                fontWeight="bold" 
-                color="blue.500"
-              >
-                {loading ? 'Loading...' : userCount}
-              </Text>
-            </Box>
-
-            {/* Total Places Card */}
-            <Box
-              bg="white"
-              borderRadius="lg"
-              p={4}
-              boxShadow="md"
-            >
-              <Text 
-                fontSize="xl" 
-                fontWeight="bold" 
-                mb={2}
-                color={"black"}
-              >
-                Total Places
-              </Text>
-              <Text 
-                color="gray.600"
-                fontSize="md"
-              >
-                Total Tempat yang telah dimasukan Admin
-              </Text>
-              <Text 
-                mt={4} 
-                fontSize="2xl" 
-                fontWeight="bold" 
-                color="green.500"
-              >
-                {loading ? 'Loading...' : placeCount}
-              </Text>
-            </Box>
-
-            {/* Total Reviews Card */}
-            <Box
-              bg="white"
-              borderRadius="lg"
-              p={4}
-              boxShadow="md"
-            >
-              <Text 
-                fontSize="xl" 
-                fontWeight="bold" 
-                mb={2}
-                color={"black"}
-              >
-                Total Reviews
-              </Text>
-              <Text 
-                color="gray.600"
-                fontSize="md"
-              >
-                Total review yang telah diulas user
-              </Text>
-              <Text 
-                mt={4} 
-                fontSize="2xl" 
-                fontWeight="bold" 
-                color="purple.500"
-              >
-                {loading ? 'Loading...' : reviewCount}
-              </Text>
-            </Box>
+            {dashboardCards.map((card, index) => (
+              <DashboardCard
+                key={index}
+                title={card.title}
+                description={card.description}
+                count={card.count}
+                loading={loading}
+                color={card.color}
+              />
+            ))}
           </SimpleGrid>
         </VStack>
       </Flex>
