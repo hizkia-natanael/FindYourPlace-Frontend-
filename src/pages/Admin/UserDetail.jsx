@@ -75,13 +75,7 @@ const UserDetail = () => {
             {/* Tombol Aksi */}
             <div className="flex justify-center w-full mt-6">
               <button
-                onClick={handleEditUser}
-                className="bg-[#C66E4E] text-white px-4 py-2 rounded mr-4"
-              >
-                Edit
-              </button>
-              <button
-                onClick={() => navigate("/user-admin")}
+                onClick={() => navigate("/admin/user-admin")}
                 className="bg-gray-300 text-black px-4 py-2 rounded"
               >
                 ← Kembali
