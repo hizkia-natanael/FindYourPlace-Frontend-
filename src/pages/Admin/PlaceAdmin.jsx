@@ -4,7 +4,6 @@ import Logo from '../../assets/logo.svg';
 import usePlaceStore from '../../config/placeStore';
 import usePlaceFormStore from '../../config/placeFormStore';
 import { Upload } from '../../components/atoms';
-import { Sidebar } from '../../components/organisms';
 
 const PlacesAdmin = () => {
   const { form, imgPreview, setFormData, setImgPreview, resetFormData } = usePlaceFormStore();
@@ -55,99 +54,88 @@ const PlacesAdmin = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="w-full h-20 px-8 flex items-center bg-white shadow-md">
-        <img src={Logo} alt="Logo" className="h-12" />
-      </header>
+    <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="bg-white rounded-lg shadow-md p-8 w-full max-w-2xl">
+        <header className="mb-8 text-center">
+          <img src={Logo} alt="Logo" className="h-12 mx-auto mb-4" />
+          <h2 className="text-2xl font-semibold text-gray-800">
+            {isUpdate ? 'Edit Place' : 'Add New Place'}
+          </h2>
+        </header>
 
-      {/* Main Content */}
-      <div className="flex h-[calc(100vh-5rem)]">
-        {/* Sidebar */}
-        <Sidebar className="w-1/5 bg-white shadow-lg overflow-auto" />
-
-        {/* Main Panel */}
-        <main className="flex-grow p-8">
-          <div className="bg-white rounded-lg shadow-md p-8 max-w-3xl mx-auto">
-            <h2 className="text-2xl font-semibold text-gray-800 text-center mb-6">
-              {isUpdate ? 'Edit Place' : 'Add New Place'}
-            </h2>
-
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Place Name
-                </label>
-                <input
-                  type="text"
-                  value={name}
-                  onChange={(e) => setFormData('name', e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                  placeholder="Enter place name"
-                  required
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Description
-                </label>
-                <textarea
-                  value={description}
-                  onChange={(e) => setFormData('description', e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none h-32"
-                  placeholder="Enter place description"
-                  required
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Address
-                </label>
-                <input
-                  type="text"
-                  value={address}
-                  onChange={(e) => setFormData('address', e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                  placeholder="Enter address"
-                  required
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Google Maps Link
-                </label>
-                <input
-                  type="text"
-                  value={googleMapsLink}
-                  onChange={(e) => setFormData('googleMapsLink', e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                  placeholder="Enter Google Maps link"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Upload Image
-                </label>
-                <Upload
-                  onChange={onImgUpload}
-                  src={imgPreview}
-                  className="w-full"
-                />
-              </div>
-
-              <button
-                type="submit"
-                className="w-full bg-blue-600 text-white py-2 rounded-lg shadow-md hover:bg-blue-500 transition-all focus:outline-none"
-              >
-                {isUpdate ? 'Update Place' : 'Add Place'}
-              </button>
-            </form>
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Place Name
+            </label>
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setFormData('name', e.target.value)}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
+              placeholder="Enter place name"
+              required
+            />
           </div>
-        </main>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Description
+            </label>
+            <textarea
+              value={description}
+              onChange={(e) => setFormData('description', e.target.value)}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none h-32"
+              placeholder="Enter place description"
+              required
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Address
+            </label>
+            <input
+              type="text"
+              value={address}
+              onChange={(e) => setFormData('address', e.target.value)}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
+              placeholder="Enter address"
+              required
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Google Maps Link
+            </label>
+            <input
+              type="text"
+              value={googleMapsLink}
+              onChange={(e) => setFormData('googleMapsLink', e.target.value)}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
+              placeholder="Enter Google Maps link"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Upload Image
+            </label>
+            <Upload
+              onChange={onImgUpload}
+              src={imgPreview}
+              className="w-full"
+            />
+          </div>
+
+          <button
+            type="submit"
+            className="w-full bg-blue-600 text-white py-2 rounded-lg shadow-md hover:bg-blue-500 transition-all focus:outline-none"
+          >
+            {isUpdate ? 'Update Place' : 'Add Place'}
+          </button>
+        </form>
       </div>
     </div>
   );
