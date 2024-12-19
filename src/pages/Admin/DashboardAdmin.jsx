@@ -13,7 +13,7 @@ import {
   Text, 
   Flex, 
   SimpleGrid,
-  useToast
+  Button
 } from "@chakra-ui/react";
 
 // Constants
@@ -61,8 +61,10 @@ const DashboardCard = ({ title, description, count, loading, color }) => (
 
 const DashboardAdmin = () => {
   const navigate = useNavigate();
-  const toast = useToast();
-  
+  const [showToast, setShowToast] = useState(false);
+  const [toastMessage, setToastMessage] = useState("");
+  const [toastType, setToastType] = useState("success"); // success, error, info, etc.
+
   // State
   const [dashboardData, setDashboardData] = useState({
     users: 0,
@@ -132,16 +134,13 @@ const DashboardAdmin = () => {
         reviews: extractCount(reviewsRes.data)
       });
 
+      // Show success toast
+      showToastMessage("Data fetched successfully!");
+
     } catch (error) {
       console.error('API Error:', error);
       
-      toast({
-        title: 'Error fetching dashboard data',
-        description: error.response?.data?.message || 'Please try again later',
-        status: 'error',
-        duration: 5000,
-        isClosable: true,
-      });
+      showToastMessage("Error fetching data!", "error");
 
     } finally {
       setLoading(false);
@@ -173,6 +172,15 @@ const DashboardAdmin = () => {
     }
   ];
 
+  const showToastMessage = (message, type = "success") => {
+    setToastMessage(message);
+    setToastType(type);
+    setShowToast(true);
+    setTimeout(() => {
+      setShowToast(false);
+    }, 3000); // Hide toast after 3 seconds
+  };
+
   return (
     <Flex 
       direction="column" 
@@ -180,6 +188,13 @@ const DashboardAdmin = () => {
       bg="#E8E8E8"
     >
       <AdminHeader />
+
+      {/* Toast Notification */}
+      {showToast && (
+        <div className={`fixed top-4 right-4 p-4 rounded shadow-lg text-white ${toastType === "error" ? "bg-red-500" : "bg-green-500"}`}>
+          {toastMessage}
+        </div>
+      )}
 
       <Flex flex={1} mt={4} mx={4}>
         <Box width="250px" mr={4}>
@@ -208,6 +223,8 @@ const DashboardAdmin = () => {
           </SimpleGrid>
         </VStack>
       </Flex>
+
+      <Button onClick={fetchDashboardData}>Fetch Data</Button>
     </Flex>
   );
 };
