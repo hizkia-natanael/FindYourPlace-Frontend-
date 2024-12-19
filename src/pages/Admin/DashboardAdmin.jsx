@@ -208,7 +208,8 @@ const DashboardAdmin = () => {
         >
           <SimpleGrid 
             columns={{ base: 1, md: 3 }} 
-            spacing={6}
+            spacing={10}
+            gap={"10px"}
           >
             {dashboardCards.map((card, index) => (
               <DashboardCard
