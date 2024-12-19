@@ -64,7 +64,7 @@ const UserAdmin = () => {
 
   // Handle view user details
   const handleViewUser = (user) => {
-    navigate(`/user-detail`, { 
+    navigate(`/admin/user-detail`, { 
       state: { user },
       replace: false 
     });

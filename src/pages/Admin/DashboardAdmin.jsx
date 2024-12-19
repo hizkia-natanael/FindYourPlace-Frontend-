@@ -135,7 +135,7 @@ const DashboardAdmin = () => {
       });
 
       // Show success toast
-      showToastMessage("Data fetched successfully!");
+      showToastMessage("Data berhasil dimuat!");
 
     } catch (error) {
       console.error('API Error:', error);

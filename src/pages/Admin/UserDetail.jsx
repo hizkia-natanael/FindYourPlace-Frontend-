@@ -15,7 +15,7 @@ const UserDetail = () => {
     id: "N/A",
     name: "Unknown User",
     email: "unknown@example.com",
-    profilePic: "https://via.placeholder.com/100", 
+    profilePic: "https://t3.ftcdn.net/jpg/03/53/11/00/360_F_353110097_nbpmfn9iHlxef4EDIhXB1tdTD0lcWhG9.jpg", 
   };
 
   const handleUpdateUser = location.state?.handleUpdateUser;
@@ -43,7 +43,7 @@ const UserDetail = () => {
             {/* Profil User */}
             <div className="flex flex-col items-center justify-center space-y-3">
               <img
-                src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGVvcGxlfGVufDB8fDB8fHww"
+                src="https://t3.ftcdn.net/jpg/03/53/11/00/360_F_353110097_nbpmfn9iHlxef4EDIhXB1tdTD0lcWhG9.jpg"
                 alt="User Profile"
                 className="rounded-full w-[120px] h-[120px]"
               />
